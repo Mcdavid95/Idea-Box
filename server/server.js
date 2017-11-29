@@ -7,13 +7,22 @@ import bodyParser from 'body-parser';
 import colors from 'colors';
 
 dotenv.config();
+// database config
+const configDB = require('./config/database');
 
-const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PASSWORD;
+console.log(configDB);
+
+if (process.env.NODE_ENV !== 'production') {
+  mongoose.connect(configDB.url); // connect to our database
+} else {
+  mongoose.connect(configDB.url_production); // connect to our database
+}
+// const dbUser = process.env.DB_USER;
+// const dbPassword = process.env.DB_PASSWORD;
 const port = parseInt(process.env.PORT, 10) || 8000;
 
 // database config
-// mongoose.connect(`mongodb://${dbUser}:${dbPassword}@ds119446.mlab.com:19446/todolist`)
+// mongoose.connect(`mongodb://${dbUser}:${dbPassword}@ds119446.mlab.com:19446/todolist`);
 // Set up the express app
 const app = express();
 
