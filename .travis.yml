@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "node"
+
+group: deprecated-2017Q3
+
+script:
+  - npm run test
