@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import User from '../models/User';
 
@@ -16,7 +17,7 @@ export default {
    */
   signup(req, res) {
     const promise = User.findOne({
-      email: req.body.email
+      email: req.body.email.toLowerCase()
     }).exec();
 
     promise.then((email) => {
@@ -26,7 +27,7 @@ export default {
         });
       } else {
         User.findOne({
-          username: req.body.username
+          username: req.body.username.toLowerCase()
         }).exec()
           .then((username) => {
             if (username) {
@@ -35,10 +36,10 @@ export default {
               });
             } else {
               const user = new User({
-                fullname: req.body.fullname,
-                username: req.body.username,
+                fullname: req.body.fullname.toLowerCase(),
+                username: req.body.username.toLowerCase(),
                 password: req.body.password,
-                email: req.body.email
+                email: req.body.email.toLowerCase()
               });
               user.save().then((newUser) => {
                 const token = jwt.sign(
@@ -51,17 +52,55 @@ export default {
                   { expiresIn: 24 * 60 * 60 }
                 );
                 res.status(201).send({
-                  message: `Welcome to Idea-Box!! ${newUser.username}`,
+                  message: `Welcome to Idea-Box!! ${req.body.username}`,
                   user: newUser,
                   token
                 });
               })
-                .catch((err) => {
-                  res.status(500).send(err.message);
+                .catch((error) => {
+                  res.status(500).send(error.message);
                 });
             }
           });
       }
     });
   },
+
+  signin(req, res) {
+    const promise = User.findOne({
+      username: req.body.username.toLowerCase()
+    }).exec();
+    promise.then((user) => {
+      if (!user) {
+        res.status(404).send({
+          error: 'Username is incorrect'
+        });
+      }
+      if (!bcrypt.compareSync(req.body.password, user.password)) {
+        res.status(401).send({
+          error: 'Incorrect password'
+        });
+      }
+      if (user) {
+        const token = jwt.sign(
+          {
+            id: user.id,
+            name: user.username,
+            email: user.email
+          },
+          'process.env.SECRET',
+          { expiresIn: 24 * 60 * 60 }
+        );
+        res.status(201).send({
+          token,
+          message: `Welcome back ${req.body.username}`
+        });
+      }
+    })
+      .catch((error) => {
+        res.status(500).send({
+          error: error.message
+        });
+      });
+  }
 };

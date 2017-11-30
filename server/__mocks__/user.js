@@ -6,7 +6,7 @@ export const valid = {
 };
 
 export const anotherValid = {
-  username: 'Melody',
+  username: 'Mcdavid',
   password: 'melo_13',
   email: 'melody@gmail.com',
   fullname: 'melody nwanna'
