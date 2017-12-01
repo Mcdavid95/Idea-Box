@@ -10,10 +10,12 @@ dotenv.config();
 // database config
 const configDB = require('./config/database');
 
-if (process.env.NODE_ENV !== 'production') {
-  mongoose.connect(configDB.url); // connect to our database
+if (process.env.NODE_ENV === 'production') {
+  mongoose.createConnection(configDB.url_production); // connect to our database
+} else if (process.env.NODE_ENV === 'test') {
+  mongoose.connect(configDB.url_test); // connect to our database
 } else {
-  mongoose.connect(configDB.url_production); // connect to our database
+  mongoose.createConnection(configDB.url);
 }
 // const dbUser = process.env.DB_USER;
 // const dbPassword = process.env.DB_PASSWORD;

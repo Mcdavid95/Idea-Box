@@ -3,7 +3,7 @@ import chai from 'chai';
 import mongoose from 'mongoose';
 import chaiHttp from 'chai-http';
 import server from '../../server';
-import { valid, yetAnotherValid, anotherValid, invalidUsername, invalidEmail, invalidNumber, wrongUser, noEmail, noPassword, noFullName } from '../../__mocks__/user';
+import { valid, yetAnotherValid, anotherValid, invalidEmail, wrongUser, noEmail, noPassword, noFullName } from '../../__mocks__/user';
 
 chai.use(chaiHttp);
 const api = supertest.agent(server);
@@ -12,7 +12,7 @@ const { expect } = chai;
 let token;
 
 before((done) => {
-  mongoose.createConnection('mongodb://127.0.0.1:27017/ideabox', () => {
+  mongoose.createConnection(process.env.DB_URL, () => {
     mongoose.connection.db.dropDatabase(() => {
       done();
     });
@@ -84,7 +84,6 @@ describe('Signup route', () => {
       .type('form')
       .send(valid)
       .end((err, res) => {
-        token = res.body.token;
         expect(res.status).to.deep.equal(201);
         expect(res.body.message).to.deep.equal(`Welcome to Idea-Box!! ${valid.username}`);
         done();
@@ -146,7 +145,6 @@ describe('Sign in route', () => {
         password: valid.password
       })
       .end((err, res) => {
-        token = res.body.token;
         expect(res.status).to.deep.equal(201);
         expect(res.body.message).to.deep.equal('Welcome back Mcdavid');
         done();
@@ -198,16 +196,123 @@ describe('Sign in route', () => {
       });
   });
 
-  it('should not allow user with wrong username to log in with empty username field', (done) => {
+  it('should not allow user to log in with empty password field', (done) => {
     api
       .post('/api/v1/user/signin')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send()
+      .send({
+        username: 'mcdavid'
+      })
       .end((err, res) => {
         expect(res.status).to.deep.equal(401);
-        expect(res.body.message).to.deep.equal('Username field must not be empty');
+        expect(res.body.message).to.deep.equal('Password field must not be empty');
+        done();
+      });
+  });
+});
+
+describe('Reset Password route', () => {
+  it('should not generate a token if user passes in no email address', (done) => {
+    api
+      .post('/api/v1/user/reset')
+      .expect(401)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        name: ' fkmfkmk'
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.message).to.equal('Please provide your email');
+        done();
+      });
+  });
+
+  it('should not create reset password token if email is incorrect', (done) => {
+    api
+      .post('/api/v1/user/reset')
+      .expect(404)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidEmail)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(404);
+        expect(res.body.error).to.deep.equal('Account associated with this email not found');
+        done();
+      });
+  });
+
+  it('should generate a token if user passes in a correct email address', (done) => {
+    api
+      .post('/api/v1/user/reset')
+      .expect(202)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        email: 'mcdavidemereuwa95@gmail.com'
+      })
+      .end((err, res) => {
+        token = res.body.passwordToken;
+        expect(res.status).to.equal(202);
+        expect(res.body.message).to.deep.equal('A link has has been sent to your mail');
+        done();
+      });
+  });
+
+  it('should succesfully reset the password', (done) => {
+    api
+      .put(`/api/v1/user/reset/${token}`)
+      .expect(201)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        newPassword: 'mcdavid356',
+        confirmPassword: 'mcdavid356'
+      })
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(201);
+        expect(res.body.message).to.deep.equal('Password has been updated');
+        done();
+      });
+  });
+
+  it('should not reset the password if invalid token is provided', (done) => {
+    api
+      .put('/api/v1/user/reset/98ec81c1a43749baf4b4081233fe78c14fiufub5ea505')
+      .expect(404)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        newPassword: 'mcdavid356',
+        confirmPassword: 'mcdavid356'
+      })
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(404);
+        expect(res.body.error).to.deep.equal('failed token authentication');
+        done();
+      });
+  });
+
+  it('should not reset the password if user details is incomplete', (done) => {
+    api
+      .put(`/api/v1/user/reset/${token}`)
+      .expect(400)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        newPassword: 'mcdavid356'
+      })
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(400);
+        expect(res.body.error).to.deep.equal('Please confirm passwords');
         done();
       });
   });

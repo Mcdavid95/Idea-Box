@@ -9,5 +9,11 @@ router.post('/api/v1/user/signup', validateInput.signupInput, userController.sig
 // signin route
 router.post('/api/v1/user/signin', validateInput.signInInput, userController.signin);
 
+// forgot password route
+router.post('/api/v1/user/reset', userController.forgotPassoword);
+
+// reset password
+router.put('/api/v1/user/reset/:token', userController.reset);
+
 export default router;
 
