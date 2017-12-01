@@ -84,6 +84,7 @@ describe('Signup route', () => {
       .type('form')
       .send(valid)
       .end((err, res) => {
+        console.log(res)
         expect(res.status).to.deep.equal(500);
         expect(res.body.message).to.deep.equal(`Welcome to Idea-Box!! ${valid.username}`);
         done();
@@ -98,6 +99,7 @@ describe('Signup route', () => {
       .type('form')
       .send(yetAnotherValid)
       .end((err, res) => {
+        console.log(res)
         expect(res.status).to.deep.equal(500);
         expect(res.body.token).to.be.a('string');
         done();
