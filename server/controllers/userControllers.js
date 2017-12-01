@@ -24,47 +24,45 @@ export default {
 
     promise.then((email) => {
       if (email) {
-        res.status(409).send({
+        return res.status(409).send({
           error: 'user with that email already exist'
         });
-      } else {
-        User.findOne({
-          username: req.body.username.trim().toLowerCase()
-        }).exec()
-          .then((username) => {
-            if (username) {
-              res.status(409).send({
-                error: 'user with that username already exist'
-              });
-            } else {
-              const user = new User({
-                fullname: req.body.fullname.trim().toLowerCase(),
-                username: req.body.username.trim().toLowerCase(),
-                password: req.body.password,
-                email: req.body.email.trim().toLowerCase()
-              });
-              user.save().then((newUser) => {
-                const token = jwt.sign(
-                  {
-                    id: newUser._id,
-                    username: newUser.username,
-                    email: newUser.email
-                  },
-                  process.env.SECRET,
-                  { expiresIn: 24 * 60 * 60 }
-                );
-                res.status(201).send({
-                  message: `Welcome to Idea-Box!! ${req.body.username}`,
-                  user: newUser,
-                  token
-                });
-              })
-                .catch((error) => {
-                  res.status(500).send(error.message);
-                });
-            }
-          });
       }
+      User.findOne({
+        username: req.body.username.trim().toLowerCase()
+      }).exec()
+        .then((username) => {
+          if (username) {
+            return res.status(409).send({
+              error: 'user with that username already exist'
+            });
+          }
+          const user = new User({
+            fullname: req.body.fullname.trim().toLowerCase(),
+            username: req.body.username.trim().toLowerCase(),
+            password: req.body.password,
+            email: req.body.email.trim().toLowerCase()
+          });
+          user.save().then((newUser) => {
+            const token = jwt.sign(
+              {
+                id: newUser._id,
+                username: newUser.username,
+                email: newUser.email
+              },
+              process.env.SECRET,
+              { expiresIn: 24 * 60 * 60 }
+            );
+            return res.status(201).send({
+              message: `Welcome to Idea-Box!! ${req.body.username}`,
+              user: newUser,
+              token
+            });
+          })
+            .catch((error) => {
+              res.status(500).send(error.message);
+            });
+        });
     });
   },
 
@@ -117,35 +115,34 @@ export default {
     const hash = crypto.randomBytes(20).toString('hex');
     const date = Date.now() + 3600000;
     if (!req.body.email) {
-      res.status(401).send({
+      return res.status(401).send({
         message: 'Please provide your email'
       });
-    } else {
-      const promise = User.findOne({
-        email: req.body.email.trim().toLowerCase()
-      }).exec();
-      promise.then((user) => {
-        if (!user) {
-          res.status(404).send({
-            error: 'Account associated with this email not found'
-          });
-        }
-        user.passwordToken = hash;
-        user.expiryTime = date;
-        user.save().then((updatedUser) => {
-          resetPassword(updatedUser.passwordToken, updatedUser.email, req.headers.host);
-          res.status(202).send({
-            message: 'A link has has been sent to your mail',
-            passwordToken: updatedUser.passwordToken
-          });
-        })
-          .catch((error) => {
-            res.status(500).send({
-              error: error.message
-            });
-          });
-      });
     }
+    const promise = User.findOne({
+      email: req.body.email.trim().toLowerCase()
+    }).exec();
+    promise.then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          error: 'Account associated with this email not found'
+        });
+      }
+      user.passwordToken = hash;
+      user.expiryTime = date;
+      user.save().then((updatedUser) => {
+        resetPassword(updatedUser.passwordToken, updatedUser.email, req.headers.host);
+        return res.status(202).send({
+          message: 'A link has has been sent to your mail',
+          passwordToken: updatedUser.passwordToken
+        });
+      })
+        .catch((error) => {
+          res.status(500).send({
+            error: error.message
+          });
+        });
+    });
   },
 
   /**
@@ -161,7 +158,7 @@ export default {
     }).exec();
     promise.then((user) => {
       if (!user) {
-        res.status(404).send({
+        return res.status(404).send({
           error: 'failed token authentication'
         });
       } else if (
@@ -180,7 +177,7 @@ export default {
         user.password = req.body.newPassword;
         user.save().then((updatedUser) => {
           sendSuccessfulReset(updatedUser.email);
-          res.status(201).send({
+          return res.status(201).send({
             message: 'Password has been updated',
             updatedUser
           });
