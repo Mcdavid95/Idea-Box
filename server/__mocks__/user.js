@@ -41,10 +41,7 @@ export const invalidFullName = {
 };
 
 export const invalidEmail = {
-  username: 'stephen',
-  password: 'step_hen',
-  email: 'mcdavidemereuwa95@gmail.com',
-  fullname: 8033379342
+  email: 'mcdavidemereu@gmail.com',
 };
 
 export const newUser1 = {
