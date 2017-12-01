@@ -74,12 +74,12 @@ export default {
     }).exec();
     promise.then((user) => {
       if (!user) {
-        res.status(404).send({
+        return res.status(404).send({
           error: 'Username is incorrect'
         });
       }
       if (!bcrypt.compareSync(req.body.password, user.password)) {
-        res.status(401).send({
+        return res.status(401).send({
           error: 'Incorrect password'
         });
       }
@@ -93,7 +93,7 @@ export default {
           'process.env.SECRET',
           { expiresIn: 24 * 60 * 60 }
         );
-        res.status(201).send({
+        return res.status(201).send({
           token,
           message: `Welcome back ${req.body.username}`
         });
