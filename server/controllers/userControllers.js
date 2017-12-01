@@ -66,6 +66,13 @@ export default {
     });
   },
 
+  /**
+   * signin a new user
+   * @param {any} req user request object
+   * @method signin
+   * @param {any} res servers response
+   * @return {void}
+   */
   signin(req, res) {
     const promise = User.findOne({
       username: req.body.username.trim().toLowerCase()

@@ -45,6 +45,26 @@ const validateInput = {
       });
     }
     return next();
+  },
+
+  /**
+   * @method ideaInput
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {*} response
+   */
+  ideaInput(req, res, next) {
+    if (typeof (req.body.title) === 'undefined') {
+      return res.status(401).json({
+        message: 'Title field must not be empty'
+      });
+    } else if (typeof (req.body.description) === 'undefined') {
+      return res.status(401).send({
+        message: 'Description field must not be empty'
+      });
+    }
+    return next();
   }
 };
 export default validateInput;
