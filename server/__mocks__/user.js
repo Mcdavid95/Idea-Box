@@ -22,6 +22,7 @@ export const yetAnotherValid = {
 export const newUser = {
   username: 'Lowei',
   email: 'lowe@gmail.com',
+  password: 'melo_13',
   fullname: 'lowwkey loowe'
 };
 

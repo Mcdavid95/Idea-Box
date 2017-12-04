@@ -11,7 +11,7 @@ const jwtVerify = {
   hasToken(req, res, next) {
     const token = req.body.token || req.headers['x-access-token'];
     if (token) {
-      jwt.verify(token, 'process.env.SECRET', (err, decoded) => {
+      jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) {
           return res.status(403).send(err);
         }

@@ -1,19 +1,52 @@
 import express from 'express';
 import validateInput from '../utils/validateInput';
 import userController from '../controllers/userControllers';
+import ideaController from '../controllers/ideaControllers';
+import jwtVerify from '../utils/jwtVerify';
 
 const router = express.Router();
+// ========= User Routes ========
+
 // signup route
-router.post('/api/v1/user/signup', validateInput.signupInput, userController.signup);
+router.post('/user/signup', validateInput.signupInput, userController.signup);
 
 // signin route
-router.post('/api/v1/user/signin', validateInput.signInInput, userController.signin);
+router.post('/user/signin', validateInput.signInInput, userController.signin);
 
 // forgot password route
-router.post('/api/v1/user/reset', userController.forgotPassoword);
+router.post('/user/reset', userController.forgotPassoword);
 
 // reset password
-router.put('/api/v1/user/reset/:token', userController.reset);
+router.put('/user/reset/:token', userController.reset);
+
+// update user profile
+router.put('/user/update', jwtVerify.hasToken, userController.updateUser);
+
+// ========= Idea Routes =========
+
+// create idea
+router.post('/idea', jwtVerify.hasToken, validateInput.ideaInput, ideaController.createIdea);
+
+// get public ideas
+router.get('/ideas', jwtVerify.hasToken, ideaController.getAllIdeas);
+
+// get one idea
+router.get('/idea', jwtVerify.hasToken, ideaController.getOneIdea);
+
+// edit idea
+router.get('/idea/:id', jwtVerify.hasToken, ideaController.editIdea);
+
+// update idea
+router.put('/idea', jwtVerify.hasToken, validateInput.updateIdea, ideaController.updateIdea);
+
+// delete idea
+router.delete('/idea', jwtVerify.hasToken, ideaController.deleteIdea);
+
+// get user ideas
+router.get('/user/ideas', jwtVerify.hasToken, ideaController.getUserIdeas);
+
+// search ideas
+router.post('/idea/search', jwtVerify.hasToken, ideaController.searchIdeas);
 
 export default router;
 
