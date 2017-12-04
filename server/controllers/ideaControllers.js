@@ -148,12 +148,12 @@ export default {
     Idea.findById(req.query.id).exec()
       .then((idea) => {
         if (idea) {
-          if (idea.author.id === req.decoded.id) {
+          if (String(idea.author.id) === req.decoded.id) {
             const promise = Idea.remove({
               _id: req.query.id,
               'author.id': req.decoded.id
             }).exec();
-            promise.then(() => res.status(204).send({
+            promise.then(() => res.status(202).send({
               message: 'Idea successfully deleted',
             }))
               .catch((error) => {
