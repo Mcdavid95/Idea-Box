@@ -67,9 +67,8 @@ export default {
   },
 
   /**
-   * signin a new user
+   * signina new user
    * @param {any} req user request object
-   * @method signin
    * @param {any} res servers response
    * @return {void}
    */
@@ -92,10 +91,10 @@ export default {
         const token = jwt.sign(
           {
             id: user.id,
-            name: user.username,
+            username: user.username,
             email: user.email
           },
-          'process.env.SECRET',
+          process.env.SECRET,
           { expiresIn: 24 * 60 * 60 }
         );
         return res.status(201).send({
@@ -202,4 +201,46 @@ export default {
       }
     });
   },
+  /**
+ * @method updateUser
+ * @param {*} req
+ * @param {*} res
+ * @returns {object} response- an object containing either successful response or error message
+ * @description receives request with new user details and update the user
+ */
+  updateUser(req, res) {
+    const userDetails = {
+      $set: req.body
+    };
+    User.findOne({
+      email: req.body.email.trim().toLowerCase()
+    }).exec()
+      .then((email) => {
+        if (email) {
+          return res.status(409).send({
+            error: 'user with that email already exist'
+          });
+        }
+        User.findOne({
+          username: req.body.username.trim().toLowerCase()
+        }).exec()
+          .then((username) => {
+            if (username) {
+              return res.status(409).send({
+                error: 'user with that username already exist'
+              });
+            }
+            const promise = User.findByIdAndUpdate(req.decoded.id, userDetails).exec();
+            promise.then((updatedDetails) => {
+              res.status(202).send({
+                message: 'Details successfully updated',
+                updatedDetails
+              });
+            })
+              .catch(error => res.status(400).send({
+                error: error.message
+              }));
+          });
+      });
+  }
 };

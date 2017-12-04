@@ -11,11 +11,11 @@ dotenv.config();
 const configDB = require('./config/database');
 
 if (process.env.NODE_ENV === 'production') {
-  mongoose.createConnection(configDB.url_production); // connect to our database
+  mongoose.connect(configDB.url_production); // connect to our database
 } else if (process.env.NODE_ENV === 'test') {
   mongoose.connect(configDB.url_test); // connect to our database
 } else {
-  mongoose.createConnection(configDB.url);
+  mongoose.connect(configDB.url);
 }
 // const dbUser = process.env.DB_USER;
 // const dbPassword = process.env.DB_PASSWORD;
@@ -32,7 +32,7 @@ app.use(logger('dev'));
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(routes);
+app.use('/api/v1', routes);
 
 // Setup a default catch-all route that sends back a welcome message in JSON format.
 app.get('*', (req, res) => res.status(200).send({

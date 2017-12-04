@@ -11,6 +11,10 @@ const commentSchema = mongoose.Schema({
     },
     username: String
   },
+  ideaId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Idea'
+  },
 });
 const Comment = mongoose.model('Comment', commentSchema);
 export default Comment;
