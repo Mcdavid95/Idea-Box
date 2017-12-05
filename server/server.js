@@ -23,6 +23,7 @@ if (process.env.NODE_ENV === 'production') {
   compiler = webpack(prodConfig);
 } else if (process.env.NODE_ENV === 'test') {
   mongoose.connect(configDB.url_test); // connect to our test database
+  compiler = webpack(devConfig);
 } else {
   mongoose.connect(configDB.url);
   compiler = webpack(devConfig);
@@ -44,7 +45,7 @@ if (process.env.NODE_ENV === 'production') {
     publicPath: prodConfig.output.publicPath,
     open: false
   }));
-} else {
+} else if (process.env.NODE_ENV === 'development') {
   app.use(webpackDevMiddleware(compiler, {
     publicPath: devConfig.output.publicPath,
     open: false
