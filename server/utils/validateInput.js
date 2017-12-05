@@ -91,6 +91,25 @@ const validateInput = {
       });
     }
     return next();
+  },
+  /**
+   * @method updateIdea
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {*} response
+   */
+  createComment(req, res, next) {
+    if (typeof (req.body.comment) === 'undefined') {
+      return res.status(401).json({
+        message: 'Content field must not be empty'
+      });
+    } else if (validator.isEmpty(req.body.comment)) {
+      return res.status(401).json({
+        message: 'Content field must not be empty'
+      });
+    }
+    return next();
   }
 };
 export default validateInput;
