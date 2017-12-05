@@ -3,13 +3,13 @@ import chai from 'chai';
 import mongoose from 'mongoose';
 import chaiHttp from 'chai-http';
 import server from '../../server';
-import { valid, yetAnotherValid, anotherValid, invalidEmail, wrongUser, noEmail, noPassword, noFullName } from '../../__mocks__/user';
+import { valid, yetAnotherValid, anotherValid, invalidEmail, wrongUser, noEmail, updateUser, noPassword, noFullName, user, newUser1 } from '../../__mocks__/user';
 
 chai.use(chaiHttp);
 const api = supertest.agent(server);
 const { expect } = chai;
 
-let token;
+let token, jwtToken;
 
 before((done) => {
   mongoose.createConnection(process.env.DB_URL, () => {
@@ -84,8 +84,23 @@ describe('Signup route', () => {
       .type('form')
       .send(valid)
       .end((err, res) => {
+        jwtToken = res.body.token;
         expect(res.status).to.deep.equal(201);
         expect(res.body.message).to.deep.equal(`Welcome to Idea-Box!! ${valid.username}`);
+        done();
+      });
+  });
+
+  it('should allow another new user to create an account', (done) => {
+    api
+      .post('/api/v1/user/signup')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(newUser1)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(201);
+        expect(res.body.message).to.deep.equal(`Welcome to Idea-Box!! ${newUser1.username}`);
         done();
       });
   });
@@ -313,6 +328,56 @@ describe('Reset Password route', () => {
       .end((err, res) => {
         expect(res.status).to.deep.equal(400);
         expect(res.body.error).to.deep.equal('Please confirm passwords');
+        done();
+      });
+  });
+});
+
+describe('Update Route', () => {
+  it('should not update user details if email is already in use', (done) => {
+    api
+      .put('/api/v1/user/update')
+      .expect(409)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .type('form')
+      .send(newUser1)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(409);
+        expect(res.body.error).to.deep.equal('user with that email already exist');
+        done();
+      });
+  });
+
+  it('should not update user details if username is already in use', (done) => {
+    api
+      .put('/api/v1/user/update')
+      .expect(409)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .type('form')
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(409);
+        expect(res.body.error).to.deep.equal('user with that username already exist');
+        done();
+      });
+  });
+
+  it('should update user details if username and email are correct', (done) => {
+    api
+      .put('/api/v1/user/update')
+      .expect(409)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .type('form')
+      .send(updateUser)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(202);
+        expect(res.body.message).to.deep.equal('Details successfully updated');
         done();
       });
   });

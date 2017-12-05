@@ -46,15 +46,24 @@ export const invalidEmail = {
 };
 
 export const newUser1 = {
-  username: 'Lowei',
+  username: 'Mark',
   password: 'lowe_13',
+  email: 'mark@gmail.com',
+  fullname: 'lowe sanders'
 };
 
-export const User = {
-  username: 'harry',
+export const user = {
+  username: 'mark',
   password: 'step_hen',
   email: 'harry@gmail.com',
-  fullname: 8033379342
+  fullname: 'elvis henry'
+};
+
+export const updateUser = {
+  username: 'henry',
+  password: 'step_hen',
+  email: 'harry@gmail.com',
+  fullname: 'elvis henry'
 };
 
 export const wrongUser = {

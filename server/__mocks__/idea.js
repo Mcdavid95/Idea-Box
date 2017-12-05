@@ -24,3 +24,8 @@ export const updateIdea = {
   description: 'once upon a time......',
   category: 'ramily'
 };
+
+export const searchIdea = {
+  searchTerm: 'man',
+  category: 'ramily'
+};

@@ -3,7 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../server';
 import { newUser } from '../../__mocks__/user';
-import { noTitle, noDescription, noCategory, createIdea, updateIdea } from '../../__mocks__/idea';
+import { noTitle, noDescription, noCategory, searchIdea, createIdea, updateIdea } from '../../__mocks__/idea';
 
 chai.use(chaiHttp);
 const api = supertest.agent(server);
@@ -184,6 +184,131 @@ describe('Idea Route', () => {
         done();
       });
   });
+});
+
+describe('Get User Ideas', () => {
+  it('should get ideas belonging to the loggedin user', (done) => {
+    api
+      .get('/api/v1/user/ideas')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(201);
+        expect(res.body).to.have.property('ideas');
+        done();
+      });
+  });
+});
+
+describe('Search Ideas', () => {
+  it('should not search and get Ideas if serachTerm is missing', (done) => {
+    api
+      .post('/api/v1/idea/search?offset=0&limit=5')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .type('form')
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(401);
+        done();
+      });
+  });
+
+  it('should search and get Ideas matching a search term', (done) => {
+    api
+      .post('/api/v1/idea/search?offset=0&limit=5')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .type('form')
+      .send(searchIdea)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(202);
+        expect(res.body).to.have.property('pageInfo');
+        done();
+      });
+  });
+});
+
+describe('Comments Route', () => {
+  it('should not post comment if comment field is not provided', (done) => {
+    api
+      .post(`/api/v1/idea/${id}/comment`)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .type('form')
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(401);
+        expect(res.body.message).to.deep.equal('Content field must not be empty');
+        done();
+      });
+  });
+
+  it('should not post comment if comment field is empty', (done) => {
+    api
+      .post(`/api/v1/idea/${id}/comment`)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .type('form')
+      .send({
+        comment: ''
+      })
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(401);
+        expect(res.body.message).to.deep.equal('Content field must not be empty');
+        done();
+      });
+  });
+
+  it('should not post comment if idea id in params is incorrect', (done) => {
+    api
+      .post(`/api/v1/idea/${'5a21da8b7e71e925e53d4ea3'}/comment`)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .type('form')
+      .send({
+        comment: 'hola babe'
+      })
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(404);
+        expect(res.body.message).to.deep.equal('Idea with id: 5a21da8b7e71e925e53d4ea3 does not exist');
+        done();
+      });
+  });
+
+  it('should post comment to an idea', (done) => {
+    api
+      .post(`/api/v1/idea/${id}/comment`)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .type('form')
+      .send({
+        comment: 'hola babe'
+      })
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(201);
+        expect(res.body.message).to.deep.equal('Comment posted successfully');
+        done();
+      });
+  });
+
+  it('should get all comments attached to an idea', (done) => {
+    api
+      .get(`/api/v1/idea/${id}/comment`)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(202);
+        expect(res.body.message).to.deep.equal('Comments successfully fetched');
+        done();
+      });
+  });
 
   it('should delete an idea', (done) => {
     api
@@ -191,11 +316,34 @@ describe('Idea Route', () => {
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .set('x-access-token', jwtToken)
-      .type('form')
       .end((err, res) => {
-        console.log(res);
         expect(res.status).to.deep.equal(202);
         expect(res.body.message).to.deep.equal('Idea successfully deleted');
+        done();
+      });
+  });
+
+  it('should not delete an idea that does not exist', (done) => {
+    api
+      .delete(`/api/v1/idea?id=${id}`)
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(404);
+        done();
+      });
+  });
+
+  it('should not get comment if idea id is incorrect', (done) => {
+    api
+      .get(`/api/v1/idea/${id}/comment`)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', jwtToken)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(404);
+        expect(res.body.message).to.deep.equal('Idea does not exist');
         done();
       });
   });

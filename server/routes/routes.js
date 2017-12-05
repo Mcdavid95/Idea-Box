@@ -2,6 +2,7 @@ import express from 'express';
 import validateInput from '../utils/validateInput';
 import userController from '../controllers/userControllers';
 import ideaController from '../controllers/ideaControllers';
+import commentController from '../controllers/commentControllers';
 import jwtVerify from '../utils/jwtVerify';
 
 const router = express.Router();
@@ -47,6 +48,16 @@ router.get('/user/ideas', jwtVerify.hasToken, ideaController.getUserIdeas);
 
 // search ideas
 router.post('/idea/search', jwtVerify.hasToken, ideaController.searchIdeas);
+
+
+// ========= Idea Routes =========
+
+
+// post comments
+router.post('/idea/:id/comment', jwtVerify.hasToken, validateInput.createComment, commentController.createComment);
+
+// get comments
+router.get('/idea/:id/comment', jwtVerify.hasToken, commentController.getComments);
 
 export default router;
 
