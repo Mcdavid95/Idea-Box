@@ -4,25 +4,31 @@ import logger from 'morgan';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import colors from 'colors';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpack from 'webpack';
+import path from 'path';
 import routes from './routes/routes';
+import devConfig from '../webpack.config';
+import prodConfig from '../webpack.config.prod';
 
 dotenv.config();
 // database config
 const configDB = require('./config/database');
 
+let compiler;
+
 if (process.env.NODE_ENV === 'production') {
-  mongoose.connect(configDB.url_production); // connect to our database
+  mongoose.connect(configDB.url_production); // connect to our production database
+  compiler = webpack(prodConfig);
 } else if (process.env.NODE_ENV === 'test') {
-  mongoose.connect(configDB.url_test); // connect to our database
+  mongoose.connect(configDB.url_test); // connect to our test database
 } else {
   mongoose.connect(configDB.url);
+  compiler = webpack(devConfig);
 }
-// const dbUser = process.env.DB_USER;
-// const dbPassword = process.env.DB_PASSWORD;
 const port = parseInt(process.env.PORT, 10) || 8000;
 
-// database config
-// mongoose.connect(`mongodb://${dbUser}:${dbPassword}@ds119446.mlab.com:19446/todolist`);
 // Set up the express app
 const app = express();
 
@@ -32,7 +38,26 @@ app.use(logger('dev'));
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: prodConfig.output.publicPath,
+    open: false
+  }));
+} else {
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: devConfig.output.publicPath,
+    open: false
+  }));
+}
+
+app.use(webpackHotMiddleware(compiler));
+
 app.use('/api/v1', routes);
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/app', 'index.html'));
+});
 
 // Setup a default catch-all route that sends back a welcome message in JSON format.
 app.get('*', (req, res) => res.status(200).send({
