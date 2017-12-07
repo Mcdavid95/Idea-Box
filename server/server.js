@@ -28,24 +28,28 @@ if (process.env.NODE_ENV === 'production') {
   mongoose.connect(configDB.url);
   compiler = webpack(devConfig);
 }
+
+mongoose.connect(configDB.url);
+compiler = webpack(devConfig);
 const port = parseInt(process.env.PORT, 10) || 8000;
 
 // Set up the express app
 const app = express();
+app.use(logger('dev'));
 
 // Log requests to the console.
 app.use(logger('dev'));
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(webpackDevMiddleware(compiler, {
     publicPath: prodConfig.output.publicPath,
     open: false
   }));
-} else if (process.env.NODE_ENV === 'development') {
+} else {
   app.use(webpackDevMiddleware(compiler, {
     publicPath: devConfig.output.publicPath,
     open: false
@@ -56,7 +60,7 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use('/api/v1', routes);
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/app', 'index.html'));
 });
 
