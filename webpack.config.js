@@ -1,6 +1,14 @@
 const debug = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: './client/app/index.html',
+  filename: 'index.html',
+  inject: 'body'
+});
 
 module.exports = {
   devtool: debug ? 'inline-sourcemap' : false,
@@ -19,7 +27,7 @@ module.exports = {
       },
       {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader?name=fonts/[name].[ext]'
+        loaders: 'file-loader?name=fonts/[name].[ext]'
       },
       {
         test: /\.(gif|png|jpg|svg)$/i,
@@ -50,7 +58,8 @@ module.exports = {
     }),
     // new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    HtmlWebpackPluginConfig
   ],
 
   resolve: {

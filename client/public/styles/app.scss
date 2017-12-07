@@ -1,0 +1,67 @@
+$primaryColor: #f4ad42;
+html, body{
+  height: 100%;
+}
+body {
+  background: url('http://res.cloudinary.com/mc-cloud/image/upload/c_scale,q_auto:best,w_1659/v1512582575/question-mark-2492009_mkpfr1.png');
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-size:  cover;
+}
+
+nav {
+  background: $primaryColor;
+}
+
+#buttons {
+  padding-top: 50vh
+}
+.landing-buttons {
+  color: $primaryColor;
+  background: white;
+  font-weight: bold;
+  margin: 1.66%
+}
+
+.landing-buttons:hover {
+  color: white;
+  background-color: $primaryColor;
+  border: 1px solid white
+}
+
+div, body{
+  margin: 0;
+  padding: 0;
+}
+
+header, main, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+.idea-page {
+  height: 100vh;
+  background: white;
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-size:  cover;
+
+  #set-color {
+    color: $primaryColor
+  }
+
+}
+
+  #logout-button {
+    padding-left: 15vh
+  }
+
+// .landing-page {
+//   height: 100%; 
+//   width: 100%; 
+// }
