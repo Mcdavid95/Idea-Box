@@ -12,6 +12,13 @@ const initialState = {
     password: '',
     isLoggedIn: false
   },
+
+  idea: {
+    title: '',
+    description: '',
+    category: '',
+    status: ''
+  }
 };
 
 export default initialState;
