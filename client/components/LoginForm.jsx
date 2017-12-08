@@ -70,9 +70,7 @@ export default class LoginForm extends Component {
                 />
               </div>
               <div className="forgot-password row">
-                <Link to="/ideas">
-                  <button type="submit" className="btn landing-buttons">Login</button>
-                </Link>
+                <button type="submit" className="btn landing-buttons">Login</button>
                 <p> Forgot password? <Link to="/forgot-password">click to reset </Link></p>
                 <p id="signup">Don&apos;t have an account? Click
                   <Link to="/register"> here to Register</Link>

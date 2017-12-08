@@ -4,6 +4,9 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { applyMiddleware, createStore, compose } from 'redux';
+import jwt from 'jsonwebtoken';
+import setAuthToken from '../utils/setAuthToken';
+import { setCurrentUser } from '../actions';
 import App from './App';
 import rootReducer from '../reducers';
 import initialState from './initialState';
@@ -19,6 +22,13 @@ const configureStore = (state = initialState) => createStore(
 
 const store = configureStore();
 const app = document.getElementById('root');
+
+
+if (localStorage.jwtToken) {
+  setAuthToken(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)));
+}
+
 
 render(
   <Provider store={store}>

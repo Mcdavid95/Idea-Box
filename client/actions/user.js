@@ -27,7 +27,7 @@ export const userSignupRequest = userData => dispatch => axios.post('/api/v1/use
     setAuthToken(token);
     dispatch(setCurrentUser(jwt.decode(token)));
     Materialize.toast(response.data.message, 3000, 'rounded green');
-    history.push('/dashboard');
+    history.push('/ideas');
   }).catch((err) => {
     dispatch(signupUserFail(err));
     Materialize.toast(err.response.data.error, 3000, 'rounded red');
@@ -45,9 +45,9 @@ const userLoginFailed = user => ({ type: types.LOGIN_USER_ERROR, user });
    */
 export const userLoginRequest = userData => dispatch => axios.post('/api/v1/user/signin', userData)
   .then((response) => {
-    console.log(response);
     dispatch(userLoginSuccess(response));
     const { token } = response.data;
+    console.log(token);
     localStorage.setItem('jwtToken', token);
     setAuthToken(token);
     dispatch(setCurrentUser(jwt.decode(token)));
