@@ -1,4 +1,4 @@
-$primaryColor: #f4ad42;
+$primaryColor: #f4ab40;
 html, body{
   height: 100%;
 }
@@ -48,13 +48,18 @@ header, main, footer {
   color: black
 }
 
-.idea-page {
+.show-ideas {
   height: 100vh;
-  background: white;
-  background-position: center center;
-  background-repeat:  no-repeat;
-  background-size:  cover;
+  overflow: auto;
+  bottom: 0;
+}
 
+.idea-page {
+  min-height: 100vh;
+  background-image: url(http://res.cloudinary.com/mc-cloud/image/upload/v1512836238/sand-2005066_1920_pz8auo.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   #set-color {
     color: $primaryColor
   }
@@ -64,4 +69,41 @@ header, main, footer {
   #logout-button {
     padding-left: 15vh
   }
+  .previous {
+    border: 1px solid white;
+    color: $primaryColor;
+    cursor: pointer;
+  }
 
+  #one-idea {
+    margin: auto 30%;
+    background: white
+  }
+
+  .next {
+    border: 1px solid white;
+    color: $primaryColor;
+    cursor: pointer;
+  }
+
+  .pagination li a {
+    cursor: pointer;
+  }
+
+  .edited {
+    padding-left: 2%
+  }
+
+  .card.medium {
+    height: 250px;
+}
+
+.comment {
+  position: fixed;
+  width: 69%;
+  top: 87%
+}
+
+  #edit {
+    padding: 5%
+  }

@@ -13,12 +13,31 @@ const initialState = {
     isLoggedIn: false
   },
 
+  comment: {
+    comment: ''
+  },
+
+  getCategory: [],
+
   idea: {
     title: '',
     description: '',
     category: '',
     status: ''
-  }
+  },
+
+  editIdea: {},
+
+  getIdea: [],
+
+  userIdeas: [],
+
+  setCurrentUser: {
+    isAuthenticated: false,
+    user: {}
+  },
+
+  getIdeas: []
 };
 
 export default initialState;

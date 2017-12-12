@@ -31,6 +31,9 @@ router.post('/idea', jwtVerify.hasToken, validateInput.ideaInput, ideaController
 // get public ideas
 router.get('/ideas', jwtVerify.hasToken, ideaController.getAllIdeas);
 
+// get public ideas by catagory
+router.get('/ideas/category', jwtVerify.hasToken, ideaController.getByCategory);
+
 // get one idea
 router.get('/idea', jwtVerify.hasToken, ideaController.getOneIdea);
 

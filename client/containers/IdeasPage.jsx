@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { createIdeaRequest } from '../actions/idea';
-import initialState from '../app/initialState';
 import Header from '../components/Header/Header';
-import CreateIdea from '../containers/CreateIdea';
+import CreateIdea from '../components/CreateIdea';
+import GetPublicIdeas from './GetPublicIdeas';
 import SideNav from '../containers/SideNav';
+import { getPublicIdeas } from '../actions';
 /**
  * @class
  */
@@ -19,12 +19,6 @@ class IdeasPage extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      messages: this.props.groupMessages,
-      postMessage: initialState.postMessage,
-      match: this.props.match,
-      users: this.props.allUsers
-    };
   }
   /**
    *
@@ -36,16 +30,6 @@ class IdeasPage extends Component {
     $('.modal').modal();
     $('.tooltipped').tooltip({ delay: 50 });
   }
-  /**
-   *
-   * @param {*} nextProps
-   * @return {*} update state
-   */
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      match: nextProps.match
-    });
-  }
 
 
   /**
@@ -56,12 +40,14 @@ class IdeasPage extends Component {
       <div className="white-text idea-page">
         <Header />
         <SideNav />
-        <main className="container">
+        <main>
           <div id="modal1" className="modal  modal-fixed-footer">
             <div className="modal-content">
               <h3 className="idea-form heading">Create New Idea</h3>
-
-              <CreateIdea createIdeaRequest={this.props.createIdeaRequest} />
+              <CreateIdea
+                createIdeaRequest={this.props.createIdeaRequest}
+                getPublicIdeas={this.props.getPublicIdeas}
+              />
             </div>
             <div className="modal-footer">
               <a
@@ -71,30 +57,21 @@ class IdeasPage extends Component {
               </a>
             </div>
           </div>
-          <div className="row">
-            <div className="col s12">
-              <div className="card blue-grey darken-1">
-                <div className="card-content white-text">
-                  <span className="card-title">Card Title</span>
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.
-                  </p>
-                </div>
-                <div className="card-action">
-                  <a href="#">This is a link</a>
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <GetPublicIdeas getIdeas={this.props.getIdeas} />
         </main>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  getIdeas: state.getIdeas
+});
+
 IdeasPage.propTypes = {
   createIdeaRequest: PropTypes.func.isRequired,
+  getPublicIdeas: PropTypes.func.isRequired,
+  getIdeas: PropTypes.array.isRequired
 
 };
-export default connect(null, { createIdeaRequest })(IdeasPage);
+export default connect(mapStateToProps, { createIdeaRequest, getPublicIdeas })(IdeasPage);

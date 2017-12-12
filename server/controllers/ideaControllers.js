@@ -39,13 +39,41 @@ export default {
    * @return {void}
    */
   getAllIdeas(req, res) {
-    const promise = Idea.find({
+    const promise = Idea.paginate({
       status: 'public'
-    }).exec();
+    }, { limit: 12, page: req.query.currentPage });
     promise.then((ideas) => {
       res.status(201).send({
-        ideas,
-        message: 'Ideas successfully fetched'
+        ideas: ideas.docs,
+        pages: ideas.pages,
+        total: ideas.total,
+        message: 'Ideas successfully fetched',
+      });
+    })
+      .catch((error) => {
+        res.status(400).send({
+          error: error.message
+        });
+      });
+  },
+
+  /**
+   * get all public ideas by categories
+   * @param {any} req user request object
+   * @param {any} res servers response
+   * @return {void}
+   */
+  getByCategory(req, res) {
+    const promise = Idea.paginate({
+      status: 'public',
+      categories: req.query.category
+    }, { limit: 12, page: req.query.currentPage });
+    promise.then((ideas) => {
+      res.status(201).send({
+        ideas: ideas.docs,
+        pages: ideas.pages,
+        total: ideas.total,
+        message: 'Ideas successfully fetched',
       });
     })
       .catch((error) => {
@@ -94,6 +122,7 @@ export default {
         });
       }
       return res.status(201).send({
+        idea,
         canEdit: true
       });
     })
@@ -181,12 +210,14 @@ export default {
    * @return {void}
    */
   getUserIdeas(req, res) {
-    const promise = Idea.find({
+    const promise = Idea.paginate({
       'author.id': req.decoded.id
-    }).exec();
+    }, { limit: 12, page: req.query.currentPage });
     promise.then((ideas) => {
       res.status(201).send({
-        ideas
+        ideas: ideas.docs,
+        pages: ideas.pages,
+        total: ideas.total
       });
     })
       .catch((error) => {
