@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-// import GroupsList from '../containers/GroupList';
-// import GroupsMembers from '../containers/GroupMembers';
+import { Link, NavLink } from 'react-router-dom';
+import { logout, getByCategory } from '../actions';
 /**
  *
  */
@@ -14,11 +13,59 @@ export class SideNav extends Component {
    */
   constructor(props) {
     super(props);
+    this.logout = this.logout.bind(this);
+    this.state = {
+      category: this.props.category
+    };
+
+    this.onClick = this.onClick.bind(this);
+  }
+  /**
+   *
+   * @return {*} loads actions when page loads initially
+   */
+  componentDidMount() {
+    $('.collapsible').collapsible();
+    $('.modal').modal();
+    $('.tooltipped').tooltip({ delay: 50 });
+  }
+  /**
+ *
+ * @param {*} nextProps updated props
+ * @returns {DOM} DOM object
+ */
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      category: nextProps.category
+    });
+    this.props.getByCategory(nextProps.category, 1);
+  }
+
+  /**
+     * @return {Props} listens for event and returns props
+     * @param {string} category
+     * @param {number} page current page number
+     */
+  onClick(category, page) {
+    this.props.getByCategory(category, page);
+  }
+
+  /**
+       * @return {Props} listens for event and returns props
+       * @param {*} event
+       */
+  logout(event) {
+    event.preventDefault();
+    this.props.logout();
   }
   /**
    * @return {DOM} Dom component
    */
   render() {
+    $(document).ready(() => {
+      $('.collapsible').collapsible();
+      $('.button-collapse').sideNav();
+    });
     return (
       <div>
         <ul id="slide-out" className="side-nav fixed">
@@ -33,11 +80,15 @@ export class SideNav extends Component {
                 </a>
                 <div className="collapsible-body">
                   <ul>
-                    <Link to="/">
-                      <li className="black-text logout-button" id="logout-button">Logout</li>
-                      <li className="black-text logout-button" id="logout-button">My Ideas</li>
-                      <li className="black-text logout-button" id="logout-button">Update Profile</li>
-                    </Link>
+                    <li className="black-text logout-button" id="logout-button">
+                      <NavLink to="/" onClick={this.logout}>Logout</NavLink>
+                    </li>
+                    <li className="black-text logout-button" id="logout-button">
+                      <NavLink to="/my-ideas">My Ideas</NavLink>
+                    </li>
+                    <li className="black-text logout-button" id="logout-button">
+                    Update Profile
+                    </li>
                     <li>Update Account details</li>
                   </ul>
                 </div>
@@ -46,8 +97,9 @@ export class SideNav extends Component {
           </li>
           <li><div className="divider" /></li>
           <li><a className="subheader">Ideas</a></li>
+          <li><Link to="/ideas">All Ideas</Link></li>
           <li>
-            <a  href="#modal1" className=" modal-trigger">Create New Idea
+            <a href="#modal1" className=" modal-trigger">Create New Idea
               <i className="material-icons amber-text">
         library_add
               </i>
@@ -61,12 +113,95 @@ export class SideNav extends Component {
                 </a>
                 <div className="collapsible-body">
                   <ul>
-                    <Link to="/">
-                      <li className="black-text logout-button" id="logout-button">Logout</li>
-                      <li className="black-text logout-button" id="logout-button">My Ideas</li>
-                      <li className="black-text logout-button" id="logout-button">Update Profile</li>
-                    </Link>
-                    <li>Update Account details</li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Family"
+                      >
+                      Family
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Tech"
+                      >
+                      Tech
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Agriculture"
+                      >
+                      Agriculture
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Entertainment"
+                      >
+                      Entertainment
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Social Media"
+                      >
+                      Social Media
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Community"
+                      >Community
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Education"
+                      >Education
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Infastructure"
+                      >Infastructure
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Telecom"
+                      >Telecom
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Computer Science"
+                      >Computer Science
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Transport"
+                      >Transport
+                      </Link>
+                    </li>
+                    <li className="black-text">
+                      <Link
+                        onClick={() => this.onClick(this.state.category, 1)}
+                        to="/idea/category/Entertainment"
+                      >Entertainment
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -81,4 +216,10 @@ export class SideNav extends Component {
   }
 }
 
-export default SideNav;
+SideNav.propTypes = {
+  logout: PropTypes.func.isRequired,
+  getByCategory: PropTypes.func.isRequired,
+  category: PropTypes.string.isRequired
+};
+
+export default connect(null, { logout, getByCategory })(SideNav);

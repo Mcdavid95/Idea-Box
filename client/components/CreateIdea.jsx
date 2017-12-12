@@ -35,6 +35,7 @@ export class CreateIdea extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.createIdeaRequest(this.state);
+    this.props.getPublicIdeas(1);
   }
 
   /**
@@ -64,7 +65,7 @@ export class CreateIdea extends Component {
               onChange={this.onChange}
             />
           </div>
-          <div className="input-field">
+          <div className="input-field select-dropdown">
             <textarea
               value={this.state.description}
               name="description"
@@ -76,24 +77,28 @@ export class CreateIdea extends Component {
             <label htmlFor="textarea1">Description</label>
           </div>
           <div className="input-field col s12" >
-            <label htmlFor="category" className="control-label">Category: </label>
-            <input
-              onChange={this.onChange}
-              list="categories"
-              type="text"
-              id="category"
-              className="form-control"
+            <select
+              id="categories"
               name="category"
-              required
+              className="browser-default"
               value={this.state.category}
-            />
-            <datalist id="categories">
-              <option value="Family" />
-              <option value="Tech" />
-              <option value="Agriculture" />
-              <option value="AI" />
-              <option value="Entertainment" />
-            </datalist>
+              onChange={this.onChange}
+            >
+              <option value="" disabled defaultValue>Select a Category</option>
+              <option value="Family">Family</option>
+              <option value="Tech">Tech</option>
+              <option value="Agriculture">Agriculture</option>
+              <option value="AI">AI</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Social Media">Social Media</option>
+              <option value="Community">Community</option>
+              <option value="Education">Education</option>
+              <option value="Infastructure">Infastructure</option>
+              <option value="Telecom">Telecom</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Transport">Transport</option>
+              <option value="Art and Craft">Entertainment</option>
+            </select>
           </div>
           <div className="input-field col s7 m6 select-dropdown">
             <span>Access:</span>
@@ -122,7 +127,8 @@ export class CreateIdea extends Component {
 }
 
 CreateIdea.propTypes = {
-  createIdeaRequest: PropTypes.func.isRequired
+  createIdeaRequest: PropTypes.func.isRequired,
+  getPublicIdeas: PropTypes.func.isRequired
 
 };
 

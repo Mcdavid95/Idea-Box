@@ -47,7 +47,6 @@ export const userLoginRequest = userData => dispatch => axios.post('/api/v1/user
   .then((response) => {
     dispatch(userLoginSuccess(response));
     const { token } = response.data;
-    console.log(token);
     localStorage.setItem('jwtToken', token);
     setAuthToken(token);
     dispatch(setCurrentUser(jwt.decode(token)));
@@ -58,4 +57,22 @@ export const userLoginRequest = userData => dispatch => axios.post('/api/v1/user
     dispatch(userLoginFailed(err));
     Materialize.toast(err.response.data.error, 3000, 'rounded red');
   });
+
+const logoutSuccess = user => ({
+  type: types.LOGOUT_USER,
+  user
+});
+
+  /**
+   * @function logout
+   * @returns {object} dispatches an action
+   * @description It logs out the user and deletes token from local storage
+   */
+export const logout = () => (dispatch) => {
+  localStorage.removeItem('jwtToken');
+  setAuthToken(false);
+  dispatch(setCurrentUser({}));
+  dispatch(logoutSuccess());
+  history.push('/');
+};
 
