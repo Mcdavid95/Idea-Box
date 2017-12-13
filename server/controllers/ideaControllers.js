@@ -242,20 +242,20 @@ export default {
     }).exec()
       .then((iscount) => {
         count = iscount;
-        const promise = Idea.find({
-          $text: { $search: req.body.searchTerm.trim() },
-          categories: req.body.category
-        })
-          .skip(offset)
-          .limit(limit).exec();
-        promise.then(ideas => res.status(202).send({
-          ideas,
-          pageInfo: pagination(count, limit, offset),
-        }))
-          .catch(() => {
-            res.status(500);
-          });
       }).catch(() => {
+        res.status(500);
+      });
+    const promise = Idea.find({
+      $text: { $search: req.body.searchTerm.trim() },
+      categories: req.body.category
+    })
+      .skip(offset)
+      .limit(limit).exec();
+    promise.then(ideas => res.status(202).send({
+      ideas,
+      pageInfo: pagination(count, limit, offset),
+    }))
+      .catch(() => {
         res.status(500);
       });
   }

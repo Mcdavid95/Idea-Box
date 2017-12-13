@@ -7,6 +7,12 @@ const initialState = {
     password: ''
   },
 
+  userDetails: {
+    username: '',
+    email: '',
+    fullname: '',
+  },
+
   login: {
     username: '',
     password: '',
@@ -17,6 +23,8 @@ const initialState = {
     comment: ''
   },
 
+  getComments: [],
+
   getCategory: [],
 
   idea: {
@@ -26,7 +34,22 @@ const initialState = {
     status: ''
   },
 
-  editIdea: {},
+  forgotPassword: {
+    email: ''
+  },
+
+  resetPassword: {
+    newPassword: '',
+    confirmPassword: '',
+    class: 'reset'
+  },
+
+  editIdea: {
+    title: '',
+    description: '',
+    category: '',
+    status: ''
+  },
 
   getIdea: [],
 

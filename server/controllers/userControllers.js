@@ -242,5 +242,20 @@ export default {
               }));
           });
       });
+  },
+
+  getUserDetails(req, res) {
+    const query = User.findById(req.decoded.id);
+    query.select('fullname username email');
+    query.exec().then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          message: 'User  does not exist'
+        });
+      }
+      return res.status(200).send({
+        user
+      });
+    });
   }
 };

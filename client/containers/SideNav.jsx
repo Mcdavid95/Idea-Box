@@ -87,9 +87,8 @@ export class SideNav extends Component {
                       <NavLink to="/my-ideas">My Ideas</NavLink>
                     </li>
                     <li className="black-text logout-button" id="logout-button">
-                    Update Profile
+                      <NavLink to="/profile/edit">Update Profile</NavLink>
                     </li>
-                    <li>Update Account details</li>
                   </ul>
                 </div>
               </li>

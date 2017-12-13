@@ -101,3 +101,31 @@ export const updateIdea = (id, updatedIdea) => dispatch => axios.put(`/api/v1/id
     Materialize.toast('could not fetch idea', 3000, 'rounded red');
   });
 
+
+const commentSuccess = comment => ({ type: types.CREATE_COMMENT_SUCCESS, comment });
+
+const commentFailed = comment => ({ type: types.CREATE_COMMENT_ERROR, comment });
+
+export const sendComment = (commentData, id) => dispatch => axios.post(`/api/v1/idea/${id}/comment`, commentData)
+  .then((response) => {
+    dispatch(commentSuccess(response.data.newComment));
+    Materialize.toast(response.data.message, 3000, 'rounded green');
+  })
+  .catch((response) => {
+    dispatch(commentFailed(response));
+    Materialize.toast(response.data.message, 3000, 'rounded red');
+  });
+
+const getCommentsSuccess = comments => ({ type: types.GET_COMMENTS_SUCCESS, comments });
+
+const getCommentsFailed = comments => ({ type: types.GET_COMMENTS_ERROR, comments });
+
+export const getComments = id => dispatch => axios.get(`/api/v1/idea/${id}/comment`)
+  .then((response) => {
+    dispatch(getCommentsSuccess(response.data.comments));
+    Materialize.toast(response.data.message, 3000, 'rounded green');
+  })
+  .catch((response) => {
+    dispatch(getCommentsFailed(response));
+    Materialize.toast(response.data.message, 3000, 'rounded red');
+  });

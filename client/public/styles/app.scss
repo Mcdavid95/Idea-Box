@@ -76,7 +76,6 @@ header, main, footer {
   }
 
   #one-idea {
-    margin: auto 30%;
     background: white
   }
 
@@ -102,6 +101,21 @@ header, main, footer {
   position: fixed;
   width: 69%;
   top: 87%
+}
+
+.show-comments {
+  height: 40vh;
+  overflow: auto;
+}
+
+#center {
+  border: 2px solid white;
+  border-radius: 10%;
+  background: white;
+  color: black;
+  width: 100%;
+  margin: 2% auto;
+  height: 20%
 }
 
   #edit {

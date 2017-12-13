@@ -76,3 +76,42 @@ export const logout = () => (dispatch) => {
   history.push('/');
 };
 
+const userDetailsSuccess = details => ({ type: types.GET_USERDETAILS_SUCCESS, details });
+
+const userDetailsFailed = details => ({ type: types.GET_USERDETAILS_ERROR, details });
+
+/**
+   * @function getUserDetails
+   * @returns {object} dispatches an action
+   * @description It logs out the user and deletes token from local storage
+   */
+export const getUserDetails = () => dispatch => axios.get('/api/v1/user/info')
+  .then((response) => {
+    dispatch(userDetailsSuccess(response.data.user));
+  })
+  .catch((response) => {
+    dispatch(userDetailsFailed(response));
+  });
+
+const updateDetailsSuccess = details => ({ type: types.UPDATE_USERDETAILS_SUCCESS, details });
+
+const updateDetailsFailed = details => ({ type: types.UPDATE_USERDETAILS_ERROR, details });
+
+/**
+     * @function updateUserDetails
+     * @returns {object} dispatches an action
+     * @description It logs out the user and deletes token from local storage
+     * @param {object} userData form data
+     */
+export const updateUserDetails = userData => dispatch => axios.put('/api/v1/user/update', userData)
+  .then((response) => {
+    dispatch(updateDetailsSuccess(response));
+    Materialize.toast(response.data.message, 3000, 'rounded green');
+    history.push('/my-ideas');
+  })
+  .catch((response) => {
+    dispatch(updateDetailsFailed(response));
+    console.log(response);
+    Materialize.toast(response.error, 3000, 'rounded red');
+  });
+

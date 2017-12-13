@@ -20,6 +20,9 @@ router.post('/user/reset', userController.forgotPassoword);
 // reset password
 router.put('/user/reset/:token', userController.reset);
 
+// get user profile
+router.get('/user/info', jwtVerify.hasToken, userController.getUserDetails);
+
 // update user profile
 router.put('/user/update', jwtVerify.hasToken, userController.updateUser);
 
