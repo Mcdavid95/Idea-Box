@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import initialState from '../app/initialState';
 /**
  * @class CommentForm
@@ -35,7 +34,7 @@ export default class CommentForm extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    this.props.userLoginRequest(this.state);
+    this.props.sendComment(this.state, this.props.id);
   }
   /**
    * @return {DOM} DOM Object
@@ -72,5 +71,6 @@ export default class CommentForm extends Component {
 }
 
 CommentForm.propTypes = {
-  userLoginRequest: PropTypes.func.isRequired
+  sendComment: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired
 };

@@ -1,11 +1,15 @@
 export { userSignupRequest } from './user';
 export { userLoginRequest } from './user';
 export { setCurrentUser } from './user';
+export { logout } from './user';
+export { getUserDetails } from './user';
+export { updateUserDetails } from './user';
 export { createIdeaRequest } from './idea';
 export { getPublicIdeas } from './idea';
-export { logout } from './user';
 export { getOneIdea } from './idea';
 export { getByCategory } from './idea';
 export { getUserIdeas } from './idea';
 export { editIdea } from './idea';
 export { updateIdea } from './idea';
+export { sendComment } from './idea';
+export { getComments } from './idea';

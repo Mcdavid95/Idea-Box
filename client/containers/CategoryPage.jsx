@@ -121,10 +121,10 @@ class CategoryPage extends Component {
                       <span className="card-title">{ideas.title}</span>
                       <p>{ideas.description}</p>
                       <br />
-                      <p className="black-text"><strong>Category:</strong> {ideas.categories}</p>
+                      <p className="black-text"><strong>Category:</strong><span className="new badge" data-badge-caption="">{ideas.categories}</span></p>
                     </div>
                     <div className="card-action">
-                      <Link to={`/idea/id/${ideas._id}`}>comment</Link>
+                      <Link to={`/idea/id/${ideas._id}`}><i className="material-icons">comment</i> Comment</Link>
                       {ideas.modified ? edited : ''}
                     </div>
                   </div>

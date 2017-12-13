@@ -118,11 +118,11 @@ class UserIdeaPage extends Component {
                       <span className="card-title">{ideas.title}</span>
                       <p>{ideas.description}</p>
                       <br />
-                      <p className="black-text"><strong>Category:</strong> {ideas.categories}</p>
+                      <p className="black-text"><strong>Category:</strong> <span className=" new badge" data-badge-caption="">{ideas.categories}</span></p>
                       <p className="black-text"><strong>Status:</strong> <span className="black-text edited">{ideas.status}</span></p>
                     </div>
                     <div className="card-action">
-                      <Link to={`/idea/edit/${ideas._id}`}>Edit</Link>
+                      <Link to={`/idea/edit/${ideas._id}`}><i className="material-icons">edit</i></Link>
                       {ideas.modified ? edited : ''}
                     </div>
                   </div>

@@ -167,7 +167,6 @@ const mapStateToProps = state => ({
 });
 
 EditIdeaPage.propTypes = {
-  EditIdeaPageRequest: PropTypes.func.isRequired,
   editIdea: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   currentIdea: PropTypes.object.isRequired,

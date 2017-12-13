@@ -18,10 +18,10 @@ export default {
             ideaId: req.params.id,
             status: req.body.status
           });
-          comment.save().then((newCommennt) => {
+          comment.save().then((newComment) => {
             res.status(201).send({
               message: 'Comment posted successfully',
-              newCommennt
+              newComment
             });
           })
             .catch(() => {

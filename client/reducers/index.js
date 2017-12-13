@@ -8,7 +8,12 @@ import getIdea from './getIdea';
 import getCategory from './getCategory';
 import userIdeas from './userIdeas';
 import editIdea from './editIdea';
-import updateIdea from './updateIdea'; 
+import updateIdea from './updateIdea';
+import comment from './comment';
+import getComments from './getComments';
+import userDetails from './userDetails';
+import forgotPassword from './forgotPassword';
+import resetPassword from './resetPassword';
 
 const rootReducer = combineReducers({
   signup,
@@ -20,7 +25,12 @@ const rootReducer = combineReducers({
   getCategory,
   userIdeas,
   editIdea,
-  updateIdea
+  updateIdea,
+  comment,
+  getComments,
+  userDetails,
+  forgotPassword,
+  resetPassword
 });
 
 export default rootReducer;
