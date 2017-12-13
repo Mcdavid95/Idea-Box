@@ -111,7 +111,59 @@ export const updateUserDetails = userData => dispatch => axios.put('/api/v1/user
   })
   .catch((response) => {
     dispatch(updateDetailsFailed(response));
-    console.log(response);
     Materialize.toast(response.error, 3000, 'rounded red');
   });
+
+const confirmEmailSuccess = email => ({
+  type: types.CONFIRM_EMAIL_SUCCESS, email
+});
+
+const confirmEmailFailed = email => ({
+  type: types.CONFIRM_EMAIL_FAILED, email
+});
+
+  /**
+   * @function forgotPassword
+   * @param { object } email
+   * @returns {object} dispatches an action
+   * @description It makes an api call to check if email is valid and send
+   */
+export const forgotPassword = email => dispatch =>
+  axios.post('/api/v1/user/reset', email)
+    .then((response) => {
+      dispatch(confirmEmailSuccess(response));
+      Materialize.toast('A Link has been sent to your mail to reset your email It expires after 30mins', 6000, 'rounded, green');
+      history.push('/login');
+    })
+    .catch((err) => {
+      dispatch(confirmEmailFailed(err));
+      Materialize.toast(err.response.data.message, 3000, 'rounded red');
+    });
+
+const confirmPasswordResetSuccess = password => ({
+  type: types.RESET_PASSWORD_SUCCESS, password
+});
+
+const confirmPasswordResetFailed = password => ({
+  type: types.RESET_PASSWORD_FAILED, password
+});
+
+/**
+ * @function confirmPasswordReset
+ * @param { string } token
+ * @param { object } newPassword
+ * @returns {object} dispatches an action
+ * @description It makes an api call to chang password and send comfirmatory email
+ */
+export const confirmPasswordReset = (token, newPassword) => dispatch =>
+  axios.put(`/api/v1/user/reset/${token}`, newPassword)
+    .then((response) => {
+      dispatch(confirmPasswordResetSuccess(response));
+      Materialize.toast('Password reset successful', 6000, 'rounded, green');
+      history.push('/login');
+    })
+    .catch((err) => {
+      dispatch(confirmPasswordResetFailed(err));
+      Materialize.toast(err.response.data.message, 3000, 'rounded red');
+    });
 

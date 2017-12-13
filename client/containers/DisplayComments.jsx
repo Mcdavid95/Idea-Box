@@ -36,7 +36,7 @@ class DisplayComments extends Component {
  */
   componentWillReceiveProps(nextProps) {
     this.setState({
-      comments: nextProps.comments[0]
+      comments: nextProps.comments[nextProps.comments.length - 1]
     });
   }
   /**

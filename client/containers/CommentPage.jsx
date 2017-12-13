@@ -5,7 +5,7 @@ import Header from '../components/Header/Header';
 import SideNav from './SideNav';
 import CommentForm from '../components/CommentForm';
 import DisplayComments from './DisplayComments';
-import { getOneIdea, sendComment } from '../actions';
+import { getOneIdea, sendComment, getComments } from '../actions';
 
 /**
  * @class
@@ -67,7 +67,7 @@ class CommentPage extends Component {
             <hr className="col s4 m4 l4" />
           </div>
           <DisplayComments id={this.props.match.params.id} />
-          <CommentForm id={this.props.match.params.id} sendComment={this.props.sendComment} />
+          <CommentForm getComments={this.props.getComments} id={this.props.match.params.id} sendComment={this.props.sendComment} />
         </main>
       </div>
     );
@@ -82,7 +82,8 @@ CommentPage.propTypes = {
   getOneIdea: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   getIdea: PropTypes.array.isRequired,
-  sendComment: PropTypes.func.isRequired
+  sendComment: PropTypes.func.isRequired,
+  getComments: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, { getOneIdea, sendComment })(CommentPage);
+export default connect(mapStateToProps, { getOneIdea, sendComment, getComments })(CommentPage);

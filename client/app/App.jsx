@@ -13,6 +13,8 @@ import CategoryPage from '../containers/CategoryPage';
 import UserIdeaPage from '../containers/UserIdeaPage';
 import EditIdeaPage from '../containers/EditIdeaPage';
 import UpdateProfilePage from '../containers/UpdateProfilePage';
+import ForgotPassword from '../containers/ForgotPassword';
+import ResetPassword from '../containers/ResetPassword';
 
 import '../public/styles/materialize.min.css';
 import '../public/styles/app.scss';
@@ -29,8 +31,10 @@ const App = () => (
       <Route exact path="/idea/id/:id" name="ideaPage" component={AuthenticateUser(IdeaPage)} />
       <Route exact path="/idea/category/:category" name="category" component={AuthenticateUser(CategoryPage)} />
       <Route exact path="/my-ideas" name="myIdea" component={AuthenticateUser(UserIdeaPage)} />
-      <Route exact path="/idea/edit/:id" name="myIdea" component={AuthenticateUser(EditIdeaPage)} />
-      <Route exact path="/profile/edit/" name="myIdea" component={AuthenticateUser(UpdateProfilePage)} />
+      <Route exact path="/idea/edit/:id" name="edit" component={AuthenticateUser(EditIdeaPage)} />
+      <Route exact path="/profile/edit/" name="profile" component={AuthenticateUser(UpdateProfilePage)} />
+      <Route exact path="/forgot-password" name="password" component={AuthenticateUser(ForgotPassword)} />
+      <Route exact path="/reset/:token" name="password" component={AuthenticateUser(ResetPassword)} />
     </Switch>
   </Router>
 );

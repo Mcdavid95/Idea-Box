@@ -123,7 +123,6 @@ const getCommentsFailed = comments => ({ type: types.GET_COMMENTS_ERROR, comment
 export const getComments = id => dispatch => axios.get(`/api/v1/idea/${id}/comment`)
   .then((response) => {
     dispatch(getCommentsSuccess(response.data.comments));
-    Materialize.toast(response.data.message, 3000, 'rounded green');
   })
   .catch((response) => {
     dispatch(getCommentsFailed(response));

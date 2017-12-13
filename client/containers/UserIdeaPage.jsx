@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import swal from 'sweetalert';
 import SideNav from '../containers/SideNav';
 import Header from '../components/Header/Header';
 import { getUserIdeas } from '../actions';
@@ -124,6 +125,7 @@ class UserIdeaPage extends Component {
                     <div className="card-action">
                       <Link to={`/idea/edit/${ideas._id}`}><i className="material-icons">edit</i></Link>
                       {ideas.modified ? edited : ''}
+                      <span><i className="right material-icons red-text">delete_sweep</i></span>
                     </div>
                   </div>
                 </li>
