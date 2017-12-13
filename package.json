@@ -6,7 +6,8 @@
   "scripts": {
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov ./node_modules/.bin/mocha --compilers js:babel-core/register ./server/tests/** --timeout 30000 --exit && npm run coverage-report",
-    "start": "nodemon --exec babel-node ./server/server.js"
+    "start": "NODE_ENV=production babel-node ./server/server.js",
+    "start:dev": "nodemon --exec babel-node ./server/server.js"
   },
   "repository": {
     "type": "git",
@@ -81,6 +82,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "supertest": "^3.0.0",
+    "uglifyjs-webpack-plugin": "^1.1.2",
     "url-loader": "^0.6.2",
     "validator": "^9.1.2",
     "webpack": "^3.10.0",

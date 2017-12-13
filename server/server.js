@@ -12,6 +12,21 @@ import routes from './routes/routes';
 import devConfig from '../webpack.config';
 import prodConfig from '../webpack.config.prod';
 
+const option = {
+  server: {
+    socketOptions: {
+      keepAlive: 300000,
+      connectTimeoutMS: 30000
+    }
+  },
+  replset: {
+    socketOptions: {
+      keepAlive: 300000,
+      connectTimeoutMS: 30000
+    }
+  }
+};
+
 dotenv.config();
 // database config
 const configDB = require('./config/database');
@@ -19,13 +34,14 @@ const configDB = require('./config/database');
 let compiler;
 
 if (process.env.NODE_ENV === 'production') {
-  mongoose.connect(configDB.url_production); // connect to our production database
+  mongoose.connect(configDB.url_production, option); // connect to our production database
   compiler = webpack(prodConfig);
+  console.log(compiler);
 } else if (process.env.NODE_ENV === 'test') {
-  mongoose.connect(configDB.url_test); // connect to our test database
+  mongoose.createConnection(configDB.url_test); // connect to our test database
   compiler = webpack(devConfig);
 } else {
-  mongoose.connect(configDB.url);
+  mongoose.createConnection(configDB.url);
   compiler = webpack(devConfig);
 }
 
