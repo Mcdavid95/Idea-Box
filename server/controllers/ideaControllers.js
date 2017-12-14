@@ -146,7 +146,8 @@ export default {
         categories: req.body.category,
         modified: true,
         updatedAt: Date.now()
-      }
+      },
+      new: true
     };
     const promise = Idea.findByIdAndUpdate(req.query.id, setIdea).exec();
     promise.then((updatedIdea) => {

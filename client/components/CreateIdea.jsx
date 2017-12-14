@@ -35,7 +35,7 @@ export class CreateIdea extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.createIdeaRequest(this.state);
-    this.props.getPublicIdeas(1);
+    this.props.getCurrentIdeas(1);
   }
 
   /**
@@ -128,7 +128,7 @@ export class CreateIdea extends Component {
 
 CreateIdea.propTypes = {
   createIdeaRequest: PropTypes.func.isRequired,
-  getPublicIdeas: PropTypes.func.isRequired
+  getCurrentIdeas: PropTypes.func.isRequired
 
 };
 

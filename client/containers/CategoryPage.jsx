@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import SideNav from '../containers/SideNav';
+import CreateIdea from '../components/CreateIdea';
 import Header from '../components/Header/Header';
-import { getByCategory } from '../actions';
+import { createIdeaRequest, getByCategory } from '../actions';
 
 /**
  * @class GetPublicIdeas
@@ -112,16 +113,35 @@ class CategoryPage extends Component {
         <Header />
         <SideNav category={this.props.match.params.category} />
         <main>
+          <div id="modal1" className="modal  modal-fixed-footer">
+            <div className="modal-content">
+              <h3 className="idea-form heading">Create New Idea</h3>
+              <CreateIdea
+                createIdeaRequest={this.props.createIdeaRequest}
+                getCurrentIdeas={this.props.getByCategory}
+              />
+            </div>
+            <div className="modal-footer">
+              <a
+                href="#!"
+                className="modal-action modal-close waves-effect waves-green btn-flat "
+              >Close
+              </a>
+            </div>
+          </div>
           <div className="row show-ideas">
             <ul>
-              { this.state.categoryIdeas.map(ideas => (
+              { this.state.categoryIdeas.length > 0 ? this.state.categoryIdeas.map(ideas => (
                 <li className="col s12 m6 l4" key={ideas._id}>
                   <div className="card white">
                     <div className="card-content black-text">
                       <span className="card-title">{ideas.title}</span>
-                      <p>{ideas.description}</p>
+                      <div>{ideas.description}</div>
                       <br />
-                      <p className="black-text"><strong>Category:</strong><span className="new badge" data-badge-caption="">{ideas.categories}</span></p>
+                      <p className="black-text">
+                        <strong>Category:</strong>
+                        <span className="new badge" data-badge-caption="">{ideas.categories}</span>
+                      </p>
                     </div>
                     <div className="card-action">
                       <Link to={`/idea/id/${ideas._id}`}><i className="material-icons">comment</i> Comment</Link>
@@ -129,7 +149,7 @@ class CategoryPage extends Component {
                     </div>
                   </div>
                 </li>
-            ))}
+            )) : (<h3> There are no ideas for this category</h3>)}
             </ul>
           </div>
           <ReactPaginate
@@ -154,9 +174,10 @@ const mapStateToProps = state => ({
 });
 
 CategoryPage.propTypes = {
+  createIdeaRequest: PropTypes.func.isRequired,
   getCategory: PropTypes.array.isRequired,
   getByCategory: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, { getByCategory })(CategoryPage);
+export default connect(mapStateToProps, { createIdeaRequest, getByCategory })(CategoryPage);

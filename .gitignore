@@ -61,3 +61,6 @@ typings/
 dist/
 bundle.js
 .DS_STORE
+client/components/CreateIdea.jsx
+client/containers/CategoryPage.jsx
+client/containers/IdeasPage.jsx

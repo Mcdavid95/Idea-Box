@@ -58,6 +58,10 @@ header, main, footer {
   color: black
 }
 
+.red-text {
+  cursor: pointer;
+}
+
 .show-ideas {
   height: 100vh;
   overflow: auto;
@@ -144,6 +148,11 @@ header, main, footer {
 .form {
   padding: 5%; 
   padding-top: 10%;
+}
+
+.description {
+  max-height: 50%;
+  overflow: auto
 }
 
   #edit {

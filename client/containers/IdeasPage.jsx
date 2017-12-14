@@ -46,7 +46,7 @@ class IdeasPage extends Component {
               <h3 className="idea-form heading">Create New Idea</h3>
               <CreateIdea
                 createIdeaRequest={this.props.createIdeaRequest}
-                getPublicIdeas={this.props.getPublicIdeas}
+                getCurrentIdeas={this.props.getPublicIdeas}
               />
             </div>
             <div className="modal-footer">
