@@ -128,3 +128,15 @@ export const getComments = id => dispatch => axios.get(`/api/v1/idea/${id}/comme
     dispatch(getCommentsFailed(response));
     Materialize.toast(response.data.message, 3000, 'rounded red');
   });
+
+const deleteIdeaSuccess = idea => ({ type: types.DELETE_IDEA_SUCCESS, idea });
+
+const deleteIdeaError = idea => ({ type: types.DELETE_IDEA_ERROR, idea });
+
+export const deleteIdea = id => dispatch => axios.delete(`/api/v1/idea?id=${id}`)
+  .then((response) => {
+    dispatch(deleteIdeaSuccess(response.data.idea));
+  })
+  .catch((error) => {
+    dispatch(deleteIdeaError(error));
+  });

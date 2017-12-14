@@ -15,3 +15,4 @@ export { editIdea } from './idea';
 export { updateIdea } from './idea';
 export { sendComment } from './idea';
 export { getComments } from './idea';
+export { deleteIdea } from './idea';

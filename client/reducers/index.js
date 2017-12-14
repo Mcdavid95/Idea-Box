@@ -14,6 +14,7 @@ import getComments from './getComments';
 import userDetails from './userDetails';
 import forgotPassword from './forgotPassword';
 import resetPassword from './resetPassword';
+import deleteIdea from './deleteIdea';
 
 const rootReducer = combineReducers({
   signup,
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   getComments,
   userDetails,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  deleteIdea
 });
 
 export default rootReducer;
