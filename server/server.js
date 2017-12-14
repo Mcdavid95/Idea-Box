@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'production') {
   compiler = webpack(prodConfig);
   console.log(compiler);
 } else if (process.env.NODE_ENV === 'test') {
-  mongoose.createConnection(configDB.url_test); // connect to our test database
+  mongoose.connect(configDB.url_test); // connect to our test database
   compiler = webpack(devConfig);
 } else {
   mongoose.createConnection(configDB.url);

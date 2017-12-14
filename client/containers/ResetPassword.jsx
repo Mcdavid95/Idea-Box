@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import initialState from '../app/initialState';
-import Header from '../components/Header/Header';
 import { confirmPasswordReset } from '../actions';
 /**
  * @class
@@ -55,53 +54,57 @@ class ResetPassword extends Component {
   render() {
     return (
       <div className="black-text idea-page">
-        <Header />
-        <main>
-          <div className="forgot-password container">
-            <div className="password-body">
-              <div>
-                <h5
-                  id="forgot-password"
-                  className="center-align"
-                >Type in new Password to Access your account
-                </h5>
-              </div>
-              <form className="col s12" onSubmit={this.onSubmit}>
-                <div className="row">
-                  <div className="input-field reset">
-                    <input
-                      className="form-control"
-                      type="password"
-                      id="reset"
-                      name="newPassword"
-                      required
-                      value={this.state.newPassword}
-                      onChange={this.onChange}
-                    />
-                    <label htmlFor="email" className="control-label">New Password</label>
-                  </div>
-
-                  <div className="input-field">
-                    <input
-                      className="form-control reset"
-                      type="password"
-                      name="confirmPassword"
-                      required
-                      value={this.state.confirmPassword}
-                      onChange={this.onChange}
-                    />
-                    <label htmlFor="email" className="control-label">Confirm Password</label>
-                  </div>
-                  <p>
-                    <input type="checkbox" onClick={() => this.showPassword()} id="check" />
-                    <label htmlFor="check">Show Password</label>
-                  </p>
-                </div>
-                <button type="submit" className="form-control btn landing-buttons">Send</button>
-              </form>
+        <div className="landing-page">
+          <nav>
+            <div className="nav-wrapper">
+              <a href="#" className="brand-logo">Logo</a>
             </div>
+          </nav>
+        </div>
+        <div className="forgot-password container">
+          <div className="password-body">
+            <div>
+              <h5
+                id="forgot-password"
+                className="center-align"
+              >Type in new Password to Access your account
+              </h5>
+            </div>
+            <form className="col s12" onSubmit={this.onSubmit}>
+              <div className="row">
+                <div className="input-field reset">
+                  <input
+                    className="form-control"
+                    type="password"
+                    id="reset"
+                    name="newPassword"
+                    required
+                    value={this.state.newPassword}
+                    onChange={this.onChange}
+                  />
+                  <label htmlFor="email" className="control-label">New Password</label>
+                </div>
+
+                <div className="input-field">
+                  <input
+                    className="form-control reset"
+                    type="password"
+                    name="confirmPassword"
+                    required
+                    value={this.state.confirmPassword}
+                    onChange={this.onChange}
+                  />
+                  <label htmlFor="email" className="control-label">Confirm Password</label>
+                </div>
+                <p>
+                  <input type="checkbox" onClick={() => this.showPassword()} id="check" />
+                  <label htmlFor="check">Show Password</label>
+                </p>
+              </div>
+              <button type="submit" className="form-control btn landing-buttons">Send</button>
+            </form>
           </div>
-        </main>
+        </div>
       </div>
     );
   }

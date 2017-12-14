@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Header from '../components/Header/Header';
 import initialState from '../app/initialState';
 import { forgotPassword } from '../actions';
 /**
@@ -41,38 +40,44 @@ class ForgotPasswordPage extends Component {
    */
   render() {
     return (
-      <div className="black-text idea-page">
-        <Header />
-        <main >
-          <div className="forgot-password container">
-            <div className="password-body">
-              <div>
-                <h5
-                  id="forgot-password"
-                  className="center-align"
-                >Input the email address associated with your account
-                </h5>
-                <p className="center">You will receive an email with a password reset link </p>
-              </div>
-              <form className="col s12 form" onSubmit={this.onSubmit}>
-                <div className="row">
-                  <div className="input-field col s8">
-                    <input
-                      className="form-control"
-                      type="email"
-                      name="email"
-                      required
-                      value={this.state.email}
-                      onChange={this.onChange}
-                    />
-                    <label htmlFor="email" className="control-label">Email</label>
-                  </div>
-                  <button type="submit" className="form-control landing-buttons btn btn-primary">Send</button>
-                </div>
-              </form>
+      <div className="black-text idea-page ">
+        <div className="landing-page">
+          <nav>
+            <div className="nav-wrapper">
+              <a href="#" className="brand-logo">Logo</a>
             </div>
+          </nav>
+        </div>
+        <div className="forgot-password container">
+          <div className="password-body">
+            <div>
+              <h5
+                id="forgot-password"
+                className="center-align"
+              >Input the email address associated with your account
+              </h5>
+              <p className="center">You will receive an email with a password reset link </p>
+            </div>
+            <form className="col s12 form" onSubmit={this.onSubmit}>
+              <div className="row">
+                <div className="input-field col s8">
+                  <input
+                    className="form-control"
+                    type="email"
+                    name="email"
+                    required
+                    value={this.state.email}
+                    onChange={this.onChange}
+                  />
+                  <label htmlFor="email" className="control-label">Email</label>
+                </div>
+                <button type="submit" className="form-control landing-buttons btn btn-primary">
+                  Send
+                </button>
+              </div>
+            </form>
           </div>
-        </main>
+        </div>
       </div>
     );
   }
