@@ -181,15 +181,19 @@ class UserIdeaPage extends Component {
                         <strong>Status:</strong>
                         <span className="black-text edited">{ideas.status}</span>
                       </p>
+                      <hr />
+                      <div className="truncate">{typeof ideas.description === 'string' ? compiler(ideas.description) : ''}</div>
                     </div>
-                    <div className="card-reveal">
-                      <div>{compiler(ideas.description)}</div>
-                      <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
+                    <div className="card-reveal black-text">
+                      <span className="card-title grey-text text-darken-4">
+                      Card Title<i className="material-icons right">close</i>
+                      </span>
+                      <div>{typeof ideas.description === 'string' ? compiler(ideas.description) : ''}</div>
                     </div>
                     <div className="card-action">
                       <Link to={`/idea/edit/${ideas._id}`}><i className="material-icons">edit</i></Link>
                       <a
-                        href={`https://twitter.com/intent/tweet?text=This%20is%20amazing%20you%20should%20read%20it&url=${window.location.origin}/ideas/view/${ideas._id}`}
+                        href={`https://twitter.com/intent/tweet?text=This%20is%20amazing%20you%20should%20read%20it&url=${window.location.origin}/idea/${ideas._id}`}
                         className="tooltipped center"
                         data-position="bottom"
                         data-delay="50"
@@ -244,3 +248,4 @@ export default connect(mapStateToProps, {
   getUserIdeas,
   deleteIdea
 })(UserIdeaPage);
+

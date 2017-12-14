@@ -215,10 +215,22 @@ export class SideNav extends Component {
   }
 }
 
-SideNav.propTypes = {
-  logout: PropTypes.func.isRequired,
-  getByCategory: PropTypes.func.isRequired,
-  category: PropTypes.string.isRequired
+const sideNavPropTypes = () => {
+  const sideNav = new SideNav();
+  if (sideNav.props.category) {
+    return {
+      logout: PropTypes.func.isRequired,
+      getByCategory: PropTypes.func.isRequired,
+      category: PropTypes.string.isRequired
+    };
+  }
+  return {
+    getByCategory: PropTypes.func.isRequired,
+    category: PropTypes.string.isRequired
+  };
 };
+
+
+SideNav.propTypes = sideNavPropTypes;
 
 export default connect(null, { logout, getByCategory })(SideNav);
