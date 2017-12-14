@@ -4,6 +4,8 @@ export { setCurrentUser } from './user';
 export { logout } from './user';
 export { getUserDetails } from './user';
 export { updateUserDetails } from './user';
+export { forgotPassword } from './user';
+export { confirmPasswordReset } from './user';
 export { createIdeaRequest } from './idea';
 export { getPublicIdeas } from './idea';
 export { getOneIdea } from './idea';

@@ -1,4 +1,5 @@
 $primaryColor: #f4ab40;
+$brandFont: 'Kurale', serif;
 html, body{
   height: 100%;
 }
@@ -7,6 +8,7 @@ body {
   background-position: center center;
   background-repeat:  no-repeat;
   background-size:  cover;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 nav {
@@ -34,8 +36,16 @@ div, body{
   padding: 0;
 }
 
+.brand-logo {
+  font-family: $brandFont
+}
+
 header, main, footer {
   padding-left: 300px;
+}
+
+#password-page {
+  padding-left: 0;
 }
 
 @media only screen and (max-width : 992px) {
@@ -60,6 +70,7 @@ header, main, footer {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
   #set-color {
     color: $primaryColor
   }
@@ -116,6 +127,23 @@ header, main, footer {
   width: 100%;
   margin: 2% auto;
   height: 20%
+}
+
+.password-body {
+  padding: 5%
+}
+
+.forgot-password {
+  background: white;
+  height: 50vh;
+  margin-top: 10%;
+  margin-left: 25%;
+  width: 50vw
+}
+
+.form {
+  padding: 5%; 
+  padding-top: 10%;
 }
 
   #edit {

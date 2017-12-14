@@ -35,6 +35,7 @@ export default class CommentForm extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.sendComment(this.state, this.props.id);
+    this.props.getComments(this.props.id);
   }
   /**
    * @return {DOM} DOM Object
@@ -72,5 +73,6 @@ export default class CommentForm extends Component {
 
 CommentForm.propTypes = {
   sendComment: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  getComments: PropTypes.func.isRequired
 };
