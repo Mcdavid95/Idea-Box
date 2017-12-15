@@ -69,7 +69,7 @@ export default class LoginForm extends Component {
                   onChange={this.onChange}
                 />
               </div>
-              <div className="forgot-password row">
+              <div className="row">
                 <button type="submit" className="btn landing-buttons">Login</button>
                 <p> Forgot password? <Link to="/forgot-password">click to reset </Link></p>
                 <p id="signup">Don&apos;t have an account? Click

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Search from '../../containers/Search';
 
 /**
  * @method Navbar
@@ -12,8 +11,10 @@ const Navbar = () => (
   <div className="landing-page">
     <nav>
       <div className="nav-wrapper">
-        <a href="#" className="brand-logo">Logo</a>
-        <Search />
+        <a href="#" className="brand-logo" id="brand-logo">IDEA-BOX</a>
+        <div className="container">
+          <Link to="/ideas/search"><i className="material-icons right">search</i></Link>
+        </div>
       </div>
     </nav>
   </div>

@@ -140,3 +140,15 @@ export const deleteIdea = id => dispatch => axios.delete(`/api/v1/idea?id=${id}`
   .catch((error) => {
     dispatch(deleteIdeaError(error));
   });
+
+const searchIdeaSuccess = idea => ({ type: types.SEARCH_SUCCESS, idea });
+
+const searchIdeaError = idea => ({ type: types.SEARCH_SUCCESS, idea });
+
+export const searchIdea = (searchTerm, offset) => dispatch => axios.post(`/api/v1/ideas/search?offset=${offset}`, searchTerm)
+  .then((response) => {
+    dispatch(searchIdeaSuccess(response.data));
+  })
+  .catch((error) => {
+    dispatch(searchIdeaError(error));
+  });

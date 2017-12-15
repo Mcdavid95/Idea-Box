@@ -235,11 +235,10 @@ export default {
       });
     }
     const offset = Number(req.query.offset);
-    const limit = Number(req.query.limit);
+    const limit = 10;
     let count;
     Idea.count({
       $text: { $search: req.body.searchTerm.trim() },
-      categories: req.body.category
     }).exec()
       .then((iscount) => {
         count = iscount;
@@ -248,7 +247,6 @@ export default {
       });
     const promise = Idea.find({
       $text: { $search: req.body.searchTerm.trim() },
-      categories: req.body.category
     })
       .skip(offset)
       .limit(limit).exec();

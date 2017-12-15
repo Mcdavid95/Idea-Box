@@ -24,29 +24,72 @@ export const resetPassword = (token, email, host) => {
     to: email,
     subject: 'Idea-Box PASSWORD RESET',
     html: `
-    <div style="width: 100%; color: white; background-color: #fff; padding: 2%;">
-    <div style="width: 60%; background-color: #2c3e56; margin: auto;">
-      <div style="height: 8%; background-color: #2c3e56; width:100%; border-bottom: 1.2px solid black">
-        <p style="color: palevioletred; font-weight:bold; margin-left: 3%; padding-top: 2%; font-family: kurale serif">POSTIT!!</p>
-      </div>
-      <div style="padding: 8%">
-        <div class="row">
-          You are receiving this because you (or someone else) 
-    have requested the reset of the password for your account.
-    Please click on the following link or paste this into your browser 
-    to complete the process
+    <body><div>
+    <div style="background-color:#f2f3f5;padding:20px">
+      <div style="max-width:600px;margin:0 auto">
+       <div 
+        style="
+          background:#fff;
+          font:14px sans-serif;
+          color:#686f7a;
+          border:2px solid #f4ab40;
+          margin-bottom:10px">
+        <div 
+          style="
+           border-bottom:1px solid #f2f3f5;
+           padding-bottom:20px;
+           padding-top:20px">
+          <h4 
+            style="
+              padding-top:0; 
+              padding-left:20px; 
+              margin:0; 
+              font-size:30px;
+              font-family:'Kurale', serif;">
+              IdeaBox</h4>
         </div>
-        <div>
-          <br>
-          <a href="http://${host}/reset/${token}"><button style="background-color: teal; color: white; border-color: teal">Reset Password</button></a>
+        <div style="padding:10px 20px;line-height:1.5em;color:#686f7a">
+          <p 
+            style="
+              padding-bottom:20px;
+              margin:20px 0;
+              color:#686f7a">
+             You have requested to reset your password for IdeaBox account. Please click on the button below to reset your password.
+          </p>
+      <p
+         style=""><a href="http://${host}/passwords/${token}" 
+            style="
+              display:inline-block;
+              font-size:15px;color:#ffffff;
+              padding:10px 15px;
+              text-decoration:none;
+              background-color:#f4ab40;
+              border-radius:3px" 
+              target="_blank">
+              Reset Password
+          </a>
+          </p>
+          <p 
+            style="
+              padding-bottom:15px;
+              margin-top:40px;
+              color:#686f7a">
+              If you haven't made this request please ignore this message.
+          </p>
+          <p 
+            style="padding-bottom:10px;
+              margin-top:20px;
+              color:#686f7a">
+              Best regards, <br>
+              IdeaBox Team.<br>
+            <a href="https://ideapack.herokuapp.com"
+              style="color: #f4ab40">https://ideahack.herokuapp.com
+            </a>
+          </p>
         </div>
-        <p style="font-weight: bold; font-family:kurale serif; color: palevioletred">POSTIT!!</p>
-      </div>
-      <div style="height: 8%; background-color: #2c3e56; width:100%; border-top: 1.2px solid black">
-      <p><small style="padding-left: 2%; text-align: center; color:white;"> Copyright m.jeck</small></p>
      </div>
     </div>
-  </div>
+  </body>
     `
   };
 

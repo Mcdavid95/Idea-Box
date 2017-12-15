@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import shortId from 'shortid';
 import { compiler } from 'markdown-to-jsx';
 import swal from 'sweetalert';
 import SideNav from '../containers/SideNav';
@@ -166,7 +167,7 @@ class UserIdeaPage extends Component {
           <div className="row show-ideas">
             <ul>
               { this.state.ideas.length > 0 ? this.state.ideas.map(ideas => (
-                <li className="col s12 m6 l4" key={ideas._id}>
+                <li className="col s12 m6 l4" key={shortId.generate()}>
                   <div className="card sticky-action medium white">
                     <div className="card-content black-text">
                       <span className="card-title activator grey-text text-darken-4"> {ideas.title}
