@@ -204,7 +204,7 @@ describe('Get User Ideas', () => {
 describe('Search Ideas', () => {
   it('should not search and get Ideas if serachTerm is missing', (done) => {
     api
-      .post('/api/v1/idea/search?offset=0&limit=5')
+      .post('/api/v1/ideas/search?offset=0')
       .set('Connection', 'keep alive')
       .set('Content-Type', 'application/json')
       .set('x-access-token', jwtToken)
@@ -217,7 +217,7 @@ describe('Search Ideas', () => {
 
   it('should search and get Ideas matching a search term', (done) => {
     api
-      .post('/api/v1/idea/search?offset=0&limit=5')
+      .post('/api/v1/ideas/search?offset=0')
       .set('Connection', 'keep alive')
       .set('Content-Type', 'application/json')
       .set('x-access-token', jwtToken)
