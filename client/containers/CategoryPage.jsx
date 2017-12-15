@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { compiler } from 'markdown-to-jsx';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import SideNav from '../containers/SideNav';
@@ -133,18 +134,40 @@ class CategoryPage extends Component {
             <ul>
               { this.state.categoryIdeas.length > 0 ? this.state.categoryIdeas.map(ideas => (
                 <li className="col s12 m6 l4" key={ideas._id}>
-                  <div className="card white">
+                  <div className="card sticky-action medium white">
                     <div className="card-content black-text">
-                      <span className="card-title">{ideas.title}</span>
-                      <div>{ideas.description}</div>
+                      <span className="card-title activator grey-text text-darken-4">{ideas.title}
+                        <i className="material-icons right">more_vert</i>
+                      </span>
                       <br />
                       <p className="black-text">
                         <strong>Category:</strong>
                         <span className="new badge" data-badge-caption="">{ideas.categories}</span>
                       </p>
+                      <hr />
+                      <div className="truncate">{typeof ideas.description === 'string' ? compiler(ideas.description) : ''}</div>
+                    </div>
+                    <div className="card-reveal black-text">
+                      <span className="card-title grey-text text-darken-4">
+                      Card Title<i className="material-icons right">close</i>
+                      </span>
+                      <div>{typeof ideas.description === 'string' ? compiler(ideas.description) : ''}</div>
                     </div>
                     <div className="card-action">
                       <Link to={`/idea/id/${ideas._id}`}><i className="material-icons">comment</i> Comment</Link>
+                      <a
+                        href={`https://twitter.com/intent/tweet?text=This%20is%20amazing%20you%20should%20read%20it&url=${window.location.origin}/idea/${ideas._id}`}
+                        className="tooltipped center"
+                        data-position="bottom"
+                        data-delay="50"
+                        data-tooltip="Like this? share on twitter"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <i className="material-icons">
+                          share
+                        </i>
+                      </a>
                       {ideas.modified ? edited : ''}
                     </div>
                   </div>
