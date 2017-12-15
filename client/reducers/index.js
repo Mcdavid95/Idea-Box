@@ -15,6 +15,7 @@ import userDetails from './userDetails';
 import forgotPassword from './forgotPassword';
 import resetPassword from './resetPassword';
 import deleteIdea from './deleteIdea';
+import search from './search';
 
 const rootReducer = combineReducers({
   signup,
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   userDetails,
   forgotPassword,
   resetPassword,
-  deleteIdea
+  deleteIdea,
+  search
 });
 
 export default rootReducer;

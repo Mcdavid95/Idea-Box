@@ -16,19 +16,19 @@ nav {
 }
 
 #buttons {
-  padding-top: 50vh
+  padding-top: 50vh;
 }
 .landing-buttons {
   color: $primaryColor;
   background: white;
   font-weight: bold;
-  margin: 1.66%
+  margin: 1.66%;
 }
 
 .landing-buttons:hover {
   color: white;
   background-color: $primaryColor;
-  border: 1px solid white
+  border: 1px solid white;
 }
 
 div, body{
@@ -36,8 +36,9 @@ div, body{
   padding: 0;
 }
 
-.brand-logo {
-  font-family: $brandFont
+#brand-logo {
+  font-family: $brandFont;
+  padding-left: 2%;
 }
 
 header, main, footer {

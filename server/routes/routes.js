@@ -53,7 +53,7 @@ router.delete('/idea', jwtVerify.hasToken, ideaController.deleteIdea);
 router.get('/user/ideas', jwtVerify.hasToken, ideaController.getUserIdeas);
 
 // search ideas
-router.post('/idea/search', jwtVerify.hasToken, ideaController.searchIdeas);
+router.post('/ideas/search', jwtVerify.hasToken, ideaController.searchIdeas);
 
 
 // ========= Idea Routes =========

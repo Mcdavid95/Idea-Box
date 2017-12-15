@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import shortId from 'shortid';
 import { Link } from 'react-router-dom';
 import { compiler } from 'markdown-to-jsx';
 import ReactPaginate from 'react-paginate';
@@ -108,7 +109,7 @@ class GetPublicIdeas extends Component {
         <div className="row show-ideas">
           <ul>
             { this.state.publicIdeas.length > 0 ? this.state.publicIdeas.map(ideas => (
-              <li className="col s12 m6 l4" key={ideas._id}>
+              <li className="col s12 m6 l4" key={shortId.generate()}>
                 <div className="card sticky-action medium white">
                   <div className="card-content black-text ">
                     <span className="card-title activator grey-text text-darken-4">{ideas.title}

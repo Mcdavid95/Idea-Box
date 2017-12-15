@@ -13,6 +13,11 @@ const initialState = {
     fullname: '',
   },
 
+  search: {
+    searchTerm: '',
+    result: []
+  },
+
   login: {
     username: '',
     password: '',
