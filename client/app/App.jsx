@@ -69,7 +69,6 @@ const App = () => (
         path="/reset/:token"
         name="password"
         component={(ResetPassword)}
-      />
       <Route exact path="/ideas/search" name="Search" component={AuthenticateUser(Search)} />
     </Switch>
   </Router>
