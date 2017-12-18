@@ -36,6 +36,9 @@ export default class CommentForm extends Component {
     event.preventDefault();
     this.props.sendComment(this.state, this.props.id);
     this.props.getComments(this.props.id);
+    this.setState({
+      comment: ''
+    });
   }
   /**
    * @return {DOM} DOM Object

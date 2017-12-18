@@ -36,6 +36,12 @@ export class CreateIdea extends Component {
     event.preventDefault();
     this.props.createIdeaRequest(this.state);
     this.props.getCurrentIdeas(1);
+    this.setState({
+      title: '',
+      description: '',
+      category: '',
+      status: ''
+    });
   }
 
   /**
