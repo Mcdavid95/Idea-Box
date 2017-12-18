@@ -1,6 +1,8 @@
 import axios from 'axios';
 import * as types from '../app/constants';
 import history from '../utils/history';
+import setAuthToken from '../utils/setAuthToken';
+import { setCurrentUser } from './user';
 
 const createIdeaSuccess = idea => ({ type: types.CREATE_IDEA_SUCCESS, idea });
 
@@ -25,14 +27,23 @@ export const createIdeaRequest = ideaInfo => dispatch => axios.post('/api/v1/ide
 const getIdeasSuccess = ideas => ({ type: types.GET_IDEAS_SUCCESS, ideas });
 
 const getIdeasFailed = ideas => ({ type: types.GET_IDEAS_ERROR, ideas });
-
+/**
+ * @function getPublicIdeas
+ * @description makes api call to get all public ideas
+ * @param {number} currentPage
+ * @returns {*} dispatches action to the store
+ */
 export const getPublicIdeas = currentPage => dispatch => axios.get(`/api/v1/ideas?currentPage=${currentPage}`)
   .then((response) => {
     dispatch(getIdeasSuccess(response.data));
   })
   .catch((error) => {
+    localStorage.removeItem('jwtToken');
+    setAuthToken(false);
     dispatch(getIdeasFailed(error));
-    Materialize.toast('could not fetch ideas', 3000, 'rounded red');
+    dispatch(setCurrentUser({}));
+    history.push('/');
+    Materialize.toast('Please Login', 3000, 'rounded red');
   });
 
 const getIdeaSuccess = idea => ({ type: types.GET_IDEA_SUCCESS, idea });

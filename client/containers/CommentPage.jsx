@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import shortId from 'shortid';
 import Header from '../components/Header/Header';
 import SideNav from './SideNav';
 import CommentForm from '../components/CommentForm';
@@ -51,20 +52,23 @@ class CommentPage extends Component {
         <Header />
         <SideNav />
         <main>
-          <ul className="collapsible center" id="one-idea" data-collapsible="accordion">
-            {this.state.getIdea.map(idea => (
-              <li key={idea._id}>
-                <div className="collapsible-header">
-                  <i className="material-icons">filter_drama</i>{idea.title}
-                </div>
-                <div className="collapsible-body"><span>{idea.description}</span></div>
-              </li>
+          <div className="">
+            <ul>
+              {this.state.getIdea.map(idea => (
+                <li>
+                  <div className="card sticky-action medium white">
+                    <div className="card-content">
+                      <span>{idea.title}</span>
+                      <br />
+                      <div className=""><span>{idea.description}</span></div>
+                    </div>
+                  </div>
+                </li>
           ))}
-          </ul>
+            </ul>
+          </div>
           <div className="row">
-            <hr className="col s4 m4 l4" />
             <span className="col s4 m4 l4 center"><h5>Comments</h5></span>
-            <hr className="col s4 m4 l4" />
           </div>
           <DisplayComments id={this.props.match.params.id} />
           <CommentForm getComments={this.props.getComments} id={this.props.match.params.id} sendComment={this.props.sendComment} />

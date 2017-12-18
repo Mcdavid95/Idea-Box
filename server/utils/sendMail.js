@@ -57,7 +57,7 @@ export const resetPassword = (token, email, host) => {
              You have requested to reset your password for IdeaBox account. Please click on the button below to reset your password.
           </p>
       <p
-         style=""><a href="http://${host}/passwords/${token}" 
+         style=""><a href="http://${host}/reset/${token}" 
             style="
               display:inline-block;
               font-size:15px;color:#ffffff;

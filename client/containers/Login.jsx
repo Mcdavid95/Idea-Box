@@ -14,19 +14,17 @@ import { userLoginRequest } from '../actions';
  */
 const Login = props => (
   <div>
-    {// <Header />
-    }
     <div className="container white-text">
       <div className="heading center">
         <h4>Welcome to <span className="brand" id="top">Idea-Box</span></h4>
         <p>
-              Connect to friends and loved ones all it takes is a click!!! Login to get started
+        Behind this mask there is
+         more than just flesh. Beneath this mask there is an idea... and ideas are bulletproof.
+        ― Alan Moore, V for Vendetta
         </p>
       </div>
       <LoginForm userLoginRequest={props.userLoginRequest} />
     </div>
-    {// <Footer />
-  }
   </div>
 );
 

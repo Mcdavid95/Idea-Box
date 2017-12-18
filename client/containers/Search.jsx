@@ -61,7 +61,9 @@ class Search extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-    this.props.searchIdea(searchInput, this.state.offset);
+    if (event.target.value.length > 0) {
+      this.props.searchIdea(searchInput, this.state.offset);
+    }
   }
   /**
    * @method onSubmit
@@ -127,7 +129,7 @@ class Search extends Component {
  */
   render() {
     const notFound = (
-      <h5>Idea not found </h5>
+      <h5>Search Idea</h5>
     );
     const edited = (
       <span className="black-text"><em>Edited</em></span>
@@ -137,20 +139,18 @@ class Search extends Component {
         <Header />
         <SideNav />
         <main>
-          <form className="center">
+          <form className="center search center">
             <div className="input-field">
               <input
                 id="search"
                 type="search"
                 value={this.state.searchTerm}
+                className="black-text search-input"
                 name="searchTerm"
                 required
                 placeholder="Search Idea"
                 onChange={this.onChange}
               />
-              <button type="submit" className="btn-small right teal btn-floating">
-                <i className="small material-icons">send</i>
-              </button>
               <i className="material-icons">close</i>
             </div>
           </form>
