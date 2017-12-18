@@ -46,14 +46,17 @@ class DisplayComments extends Component {
  */
   render() {
     return (
-      <div className="show-comments row">
+      <div className="show-comments">
         {this.state.comments.map(comment => (
-          <div className="col s12 m12">
-            <div className="card-panel white">
-              <div><span><strong>{comment.author.username}</strong></span><span className="right">{ moment(comment.createdAt).startOf().fromNow() }</span></div>
-              <hr />
-              <div className="content"><span>{comment.content}</span></div>
+          <div className="comment-bubbles">
+            <div className="comment-header">
+              <span className="comment-profile-name">
+                <i className="material-icons prefix">assignment_ind</i>
+                <h5>{comment.author.username}</h5>
+              </span>
+              <span className="right">{ moment(comment.createdAt).startOf().fromNow() }</span>
             </div>
+            <div className="content"><span>{comment.content}</span></div>
           </div>
         ))}
       </div>

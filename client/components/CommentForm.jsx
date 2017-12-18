@@ -42,32 +42,27 @@ export default class CommentForm extends Component {
    */
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="s12">
-            <form className="col s12" onSubmit={this.onSubmit}>
-              <div className="row comment">
-                <div className="input-field col s8 m8 l8">
-                  <label htmlFor="comment" className="control-label black-text">Comment: </label>
-                  <input
-                    type="text"
-                    id="comment"
-                    name="comment"
-                    value={this.state.comment}
-                    className="form-control login"
-                    required
-                    onChange={this.onChange}
-                  />
-                </div>
-                <button type="submit" className="btn landing-buttons ">
-                  <i className="material-icons">send</i>
-                </button>
-              </div>
-            </form>
+      <div className="s12">
+        <form className="col s12" onSubmit={this.onSubmit}>
+          <div className="row comment">
+            <div className="input-field col s8 m8 l8">
+              <label htmlFor="comment" className="control-label black-text">Comment: </label>
+              <input
+                type="text"
+                id="comment"
+                name="comment"
+                value={this.state.comment}
+                className="form-control login"
+                required
+                onChange={this.onChange}
+              />
+            </div>
+            <button type="submit" className="btn landing-buttons ">
+              <i className="material-icons">send</i>
+            </button>
           </div>
-        </div>
-      </div>
-    );
+        </form>
+      </div>);
   }
 }
 

@@ -62,13 +62,13 @@ const App = () => (
         exact
         path="/forgot-password"
         name="password"
-        component={AuthenticateUser(ForgotPassword)}
+        component={(ForgotPassword)}
       />
       <Route
         exact
         path="/reset/:token"
         name="password"
-        component={AuthenticateUser(ResetPassword)}
+        component={(ResetPassword)}
       />
       <Route exact path="/ideas/search" name="Search" component={AuthenticateUser(Search)} />
     </Switch>
