@@ -29,7 +29,7 @@ const getIdeasSuccess = ideas => ({ type: types.GET_IDEAS_SUCCESS, ideas });
 const getIdeasFailed = ideas => ({ type: types.GET_IDEAS_ERROR, ideas });
 /**
  * @function getPublicIdeas
- * @description makes api call to get all public ideas
+ * @description takes in current page makes api call to get all public ideas
  * @param {number} currentPage
  * @returns {*} dispatches action to the store
  */
@@ -154,7 +154,7 @@ export const deleteIdea = id => dispatch => axios.delete(`/api/v1/idea?id=${id}`
 
 const searchIdeaSuccess = idea => ({ type: types.SEARCH_SUCCESS, idea });
 
-const searchIdeaError = idea => ({ type: types.SEARCH_SUCCESS, idea });
+const searchIdeaError = idea => ({ type: types.SEARCH_ERROR, idea });
 
 export const searchIdea = (searchTerm, offset) => dispatch => axios.post(`/api/v1/ideas/search?offset=${offset}`, searchTerm)
   .then((response) => {

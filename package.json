@@ -24,6 +24,25 @@
     "url": "https://github.com/Mcdavid95/Idea-Box/issues"
   },
   "homepage": "https://github.com/Mcdavid95/Idea-Box#readme",
+  "jest": {
+    "roots": [
+      "<rootDir>/client/test"
+    ],
+    "testURL": "http:/test.com",
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/test-env.js",
+      "<rootDir>/client/tests/__mocks__"
+    ],
+    "unmockedModulePathPatterns": [
+      "node_modules/react/",
+      "node_modules/enzyme/"
+    ]
+  },
   "devDependencies": {
     "eslint": "^4.12.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -48,6 +67,8 @@
     "crypto": "^1.0.1",
     "css-loader": "^0.28.7",
     "dotenv": "^4.0.0",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.2",
@@ -57,6 +78,7 @@
     "html-webpack-plugin": "^2.30.1",
     "http": "0.0.0",
     "image-webpack-loader": "^3.4.2",
+    "jest": "^22.0.0",
     "jquery": "^3.2.1",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
@@ -67,18 +89,22 @@
     "mongoose": "^4.13.5",
     "mongoose-paginate": "^5.0.3",
     "morgan": "^1.9.0",
+    "moxios": "^0.4.0",
     "node-sass": "^4.7.2",
     "nodemailer": "^4.4.0",
     "nyc": "^11.3.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.2.0",
     "react-paginate": "^5.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-test-renderer": "^16.2.0",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.3.0",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
     "shortid": "^2.2.8",
