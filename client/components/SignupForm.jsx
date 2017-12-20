@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Router } from 'react-router-dom';
 import initialState from '../app/initialState';
+import history from '../utils/history';
 
 
 /**
@@ -110,9 +111,11 @@ export default class SignupForm extends Component {
                 id="signin"
               >
                 Already have an account?
-                <Link to="/login">
+                <Router history={history}>
+                  <Link to="/login">
                 Login
-                </Link> to continue with the app
+                  </Link>
+                </Router> to continue with the app
               </p>
             </div>
           </form>

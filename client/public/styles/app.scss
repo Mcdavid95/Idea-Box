@@ -15,6 +15,14 @@ nav {
   background: $primaryColor;
 }
 
+.card.medium {
+  opacity: 0.7
+}
+
+.card.medium:hover {
+  background: white
+}
+
 #buttons {
   padding-top: 50vh;
 }

@@ -12,7 +12,7 @@ import { userSignupRequest } from '../actions';
  * @returns {DOM} DOM Element
  * @description renders the signup page
  */
-const Signup = props => (
+export const Signup = props => (
   <div>
     {// <Header />
 }
