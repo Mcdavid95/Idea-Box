@@ -6,7 +6,7 @@ import { confirmPasswordReset } from '../actions';
 /**
  * @class
  */
-class ResetPassword extends Component {
+export class ResetPassword extends Component {
   /**
    *
    * @param {*} props

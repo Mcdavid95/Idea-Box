@@ -11,7 +11,7 @@ import { getOneIdea, sendComment, getComments } from '../actions';
 /**
  * @class
  */
-class CommentPage extends Component {
+export class CommentPage extends Component {
 /**
  * Create Inatance of class CommentPage
  * @constructor
@@ -55,7 +55,7 @@ class CommentPage extends Component {
           <div className="">
             <ul>
               {this.state.getIdea.map(idea => (
-                <li>
+                <li key={shortId.generate()}>
                   <div className="card sticky-action medium white">
                     <div className="card-content">
                       <span>{idea.title}</span>
@@ -71,7 +71,11 @@ class CommentPage extends Component {
             <span className="col s4 m4 l4 center"><h5>Comments</h5></span>
           </div>
           <DisplayComments id={this.props.match.params.id} />
-          <CommentForm getComments={this.props.getComments} id={this.props.match.params.id} sendComment={this.props.sendComment} />
+          <CommentForm
+            getComments={this.props.getComments}
+            id={this.props.match.params.id}
+            sendComment={this.props.sendComment}
+          />
         </main>
       </div>
     );

@@ -6,7 +6,7 @@ import { forgotPassword } from '../actions';
 /**
  * @class
  */
-class ForgotPasswordPage extends Component {
+export class ForgotPasswordPage extends Component {
   /**
    *
    * @param {*} props

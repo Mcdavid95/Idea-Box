@@ -114,6 +114,7 @@ export class SideNav extends Component {
                   <ul>
                     <li className="black-text">
                       <Link
+                        className="family"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Family"
                       >
@@ -122,6 +123,7 @@ export class SideNav extends Component {
                     </li>
                     <li className="black-text">
                       <Link
+                        className="tech"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Tech"
                       >
@@ -130,6 +132,7 @@ export class SideNav extends Component {
                     </li>
                     <li className="black-text">
                       <Link
+                        className="agriculture"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Agriculture"
                       >
@@ -138,6 +141,7 @@ export class SideNav extends Component {
                     </li>
                     <li className="black-text">
                       <Link
+                        className="entertainment"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Entertainment"
                       >
@@ -146,6 +150,7 @@ export class SideNav extends Component {
                     </li>
                     <li className="black-text">
                       <Link
+                        className="social-media"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Social Media"
                       >
@@ -154,6 +159,7 @@ export class SideNav extends Component {
                     </li>
                     <li className="black-text">
                       <Link
+                        className="community"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Community"
                       >Community
@@ -161,6 +167,7 @@ export class SideNav extends Component {
                     </li>
                     <li className="black-text">
                       <Link
+                        className="education"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Education"
                       >Education
@@ -168,6 +175,7 @@ export class SideNav extends Component {
                     </li>
                     <li className="black-text">
                       <Link
+                        className="infastructure"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Infastructure"
                       >Infastructure
@@ -175,6 +183,7 @@ export class SideNav extends Component {
                     </li>
                     <li className="black-text">
                       <Link
+                        className="telecom"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Telecom"
                       >Telecom
@@ -182,6 +191,7 @@ export class SideNav extends Component {
                     </li>
                     <li className="black-text">
                       <Link
+                        className="computer-science"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Computer Science"
                       >Computer Science
@@ -189,16 +199,10 @@ export class SideNav extends Component {
                     </li>
                     <li className="black-text">
                       <Link
+                        className="transport"
                         onClick={() => this.onClick(this.state.category, 1)}
                         to="/idea/category/Transport"
                       >Transport
-                      </Link>
-                    </li>
-                    <li className="black-text">
-                      <Link
-                        onClick={() => this.onClick(this.state.category, 1)}
-                        to="/idea/category/Entertainment"
-                      >Entertainment
                       </Link>
                     </li>
                   </ul>

@@ -28,6 +28,7 @@
     "roots": [
       "<rootDir>/client/test"
     ],
+    "setupFiles": ["<rootDir>/client/test/__mocks__/jqueryMock.env.js"],
     "testURL": "http:/test.com",
     "moduleFileExtensions": [
       "js",

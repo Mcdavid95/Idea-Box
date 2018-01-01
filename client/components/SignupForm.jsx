@@ -119,7 +119,10 @@ export default class SignupForm extends Component {
               </p>
             </div>
           </form>
-          <h5>There is one thing stronger than all the armies in the world, and that is an idea whose time has come.”– Victor Hugo</h5>
+          <h5>
+          There is one thing stronger than all the armies in the world,
+          and that is an idea whose time has come.”– Victor Hugo
+          </h5>
         </div>
       </div>
     );
