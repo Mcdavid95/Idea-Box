@@ -8,7 +8,7 @@ import GetPublicIdeas from './GetPublicIdeas';
 import SideNav from '../containers/SideNav';
 import { getPublicIdeas } from '../actions';
 
-const IdeasPage = props => (
+export const IdeasPage = props => (
   <div className="white-text idea-page">
     <Header />
     <SideNav />

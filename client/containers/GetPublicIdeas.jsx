@@ -10,7 +10,7 @@ import { getPublicIdeas } from '../actions';
 /**
  * @class GetPublicIdeas
  */
-class GetPublicIdeas extends Component {
+export class GetPublicIdeas extends Component {
   /**
    *
    * @param {*} props

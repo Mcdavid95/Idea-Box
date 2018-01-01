@@ -8,7 +8,7 @@ import { getComments } from '../actions';
 /**
  * @class DisplayComments
  */
-class DisplayComments extends Component {
+export class DisplayComments extends Component {
   /**
    * Creates Instance of .class DisplayName
    * @param {*} props
@@ -45,6 +45,7 @@ class DisplayComments extends Component {
  * @returns {*} DOM Object
  */
   render() {
+    console.log(this.state.comments);
     return (
       <div className="show-comments">
         {this.state.comments.map(comment => (

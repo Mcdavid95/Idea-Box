@@ -13,7 +13,7 @@ import { createIdeaRequest, getByCategory } from '../actions';
 /**
  * @class GetPublicIdeas
  */
-class CategoryPage extends Component {
+export class CategoryPage extends Component {
   /**
    *
    * @param {*} props
@@ -44,7 +44,7 @@ class CategoryPage extends Component {
  * @returns {DOM} DOM object
  */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.getCategory === 0) {
+    if (nextProps.getCategory.length === 1) {
       this.setState({
         categoryIdeas: nextProps.getCategory[0].ideas,
         pages: nextProps.getCategory[0].pages,
