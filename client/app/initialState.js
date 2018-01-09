@@ -34,9 +34,9 @@ const initialState = {
 
   idea: {
     title: '',
-    description: '',
     category: '',
-    status: ''
+    status: '',
+    reactMdeValue: { text: '', selection: null }
   },
 
   forgotPassword: {

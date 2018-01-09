@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import shortId from 'shortid';
 import Header from '../components/Header/Header';
 import SideNav from './SideNav';
+import CreateIdea from '../components/CreateIdea';
 import CommentForm from '../components/CommentForm';
 import DisplayComments from './DisplayComments';
 import { getOneIdea, sendComment, getComments } from '../actions';
@@ -29,6 +30,9 @@ export class CommentPage extends Component {
    */
   componentDidMount() {
     this.props.getOneIdea(this.props.match.params.id);
+    $('.collapsible').collapsible();
+    $('.modal').modal();
+    $('.tooltipped').tooltip({ delay: 50 });
   }
   /**
    * @method
@@ -52,6 +56,21 @@ export class CommentPage extends Component {
         <Header />
         <SideNav />
         <main>
+          <div id="modal1" className="modal  modal-fixed-footer">
+            <div className="modal-content">
+              <h3 className="idea-form heading">Create New Idea</h3>
+              <CreateIdea
+                createIdeaRequest={this.props.createIdeaRequest}
+              />
+            </div>
+            <div className="modal-footer">
+              <a
+                href="#!"
+                className="modal-action modal-close waves-effect waves-green btn-flat "
+              >Close
+              </a>
+            </div>
+          </div>
           <div className="">
             <ul>
               {this.state.getIdea.map(idea => (
@@ -91,6 +110,7 @@ CommentPage.propTypes = {
   match: PropTypes.object.isRequired,
   getIdea: PropTypes.array.isRequired,
   sendComment: PropTypes.func.isRequired,
+  createIdeaRequest: PropTypes.func.isRequired,
   getComments: PropTypes.func.isRequired
 };
 

@@ -44,7 +44,7 @@ export class ForgotPasswordPage extends Component {
         <div className="landing-page">
           <nav>
             <div className="nav-wrapper">
-              <a href="#" className="brand-logo">Logo</a>
+              <a href="#" className="brand-logo">Idea-Box</a>
             </div>
           </nav>
         </div>
