@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactMde, { ReactMdeCommands } from 'react-mde';
 import initialState from '../app/initialState';
 /**
  * @class GroupForm
@@ -18,6 +19,7 @@ export class CreateIdea extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleMarkdown = this.handleMarkdown.bind(this);
   }
   /**
    *
@@ -34,14 +36,31 @@ export class CreateIdea extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    this.props.createIdeaRequest(this.state);
+    const {
+      title, category, reactMdeValue, status
+    } = this.state;
+    const newIdea = {
+      title,
+      category,
+      description: reactMdeValue.text,
+      status
+    };
+    this.props.createIdeaRequest(newIdea);
     this.props.getCurrentIdeas(1);
     this.setState({
       title: '',
-      description: '',
+      reactMdeValue: { text: '', selection: null },
       category: '',
       status: ''
     });
+  }
+  /**
+   *
+   * @param {Event} value
+   * @return {Object} updates State
+   */
+  handleMarkdown(value) {
+    this.setState({ reactMdeValue: value });
   }
 
   /**
@@ -61,10 +80,10 @@ export class CreateIdea extends Component {
       <div>
         <form onSubmit={this.onSubmit} className="idea-form">
           <div className="input-field">
-            <label htmlFor="title" className="control-label">Title</label>
             <input
               type="text"
               name="title"
+              placeholder="Title"
               className="form-control"
               value={this.state.title}
               required
@@ -72,15 +91,18 @@ export class CreateIdea extends Component {
             />
           </div>
           <div className="input-field select-dropdown">
-            <textarea
-              value={this.state.description}
-              name="description"
-              type="text"
-              className="materialize-textarea"
-              onChange={this.onChange}
-              required
-            />
-            <label htmlFor="textarea1">Description</label>
+            <div>
+              <ReactMde
+                textAreaProps={{
+              id: 'ta1',
+              name: 'ta1',
+            }}
+                value={this.state.reactMdeValue}
+                placeholder="Description"
+                onChange={this.handleMarkdown}
+                commands={ReactMdeCommands.getDefaultCommands()}
+              />
+            </div>
           </div>
           <div className="input-field col s12" >
             <select

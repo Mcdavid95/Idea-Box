@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 import history from '../utils/history';
 import Signup from '../containers/Signup';
 import Login from '../containers/Login';

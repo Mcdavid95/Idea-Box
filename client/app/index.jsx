@@ -27,8 +27,10 @@ const app = document.getElementById('root');
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)));
+} else {
+  setAuthToken(false);
+  store.dispatch(setCurrentUser({}));
 }
-
 
 render(
   <Provider store={store}>
