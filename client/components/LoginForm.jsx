@@ -52,7 +52,7 @@ export default class LoginForm extends Component {
                   type="text"
                   name="username"
                   value={this.state.username}
-                  className="form-control login"
+                  className="form-control login username"
                   required
                   onChange={this.onChange}
                 />
@@ -64,7 +64,7 @@ export default class LoginForm extends Component {
                   type="password"
                   name="password"
                   value={this.state.password}
-                  className="form-control login"
+                  className="form-control login password"
                   required
                   onChange={this.onChange}
                 />
