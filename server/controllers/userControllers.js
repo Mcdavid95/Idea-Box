@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import User from '../models/User';
-import { resetPassword, sendSuccessfulReset } from '../utils/sendMail';
+import { resetPassword } from '../utils/sendMail';
 
 dotenv.config();
 
@@ -181,13 +181,10 @@ export default {
           });
         }
         user.password = req.body.newPassword;
-        user.save().then((updatedUser) => {
-          sendSuccessfulReset(updatedUser.email);
-          return res.status(201).send({
-            message: 'Password has been updated',
-            updatedUser
-          });
-        })
+        user.save().then(updatedUser => res.status(201).send({
+          message: 'Password has been updated',
+          updatedUser
+        }))
           .catch((error) => {
             res.status(404).send({
               error: error.message
