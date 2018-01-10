@@ -8,7 +8,7 @@ import Login from '../containers/Login';
 import AuthenticateUser from '../utils/AuthenticateUser';
 import CheckLoggedinUser from '../utils/CheckLoggedinUser';
 import IdeasPage from '../containers/IdeasPage';
-import IdeaPage from '../containers/CommentPage';
+import CommentPage from '../containers/CommentPage';
 import CategoryPage from '../containers/CategoryPage';
 import UserIdeaPage from '../containers/UserIdeaPage';
 import EditIdeaPage from '../containers/EditIdeaPage';
@@ -16,6 +16,7 @@ import UpdateProfilePage from '../containers/UpdateProfilePage';
 import ForgotPassword from '../containers/ForgotPassword';
 import ResetPassword from '../containers/ResetPassword';
 import Search from '../containers/Search';
+import ViewIdeaPage from '../containers/ViewIdeaPage';
 
 import '../public/styles/materialize.min.css';
 import '../public/styles/app.scss';
@@ -33,7 +34,13 @@ const App = () => (
         exact
         path="/idea/id/:id"
         name="ideaPage"
-        component={AuthenticateUser(IdeaPage)}
+        component={AuthenticateUser(CommentPage)}
+      />
+      <Route
+        exact
+        path="/idea/view-idea/:id"
+        name="ideaPage"
+        component={ViewIdeaPage}
       />
       <Route
         exact

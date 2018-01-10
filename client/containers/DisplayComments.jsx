@@ -45,11 +45,10 @@ export class DisplayComments extends Component {
  * @returns {*} DOM Object
  */
   render() {
-    console.log(this.state.comments);
     return (
       <div className="show-comments">
         {this.state.comments.map(comment => (
-          <div className="comment-bubbles">
+          <div className="comment-bubbles" key={comment._id}>
             <div className="comment-header">
               <span className="comment-profile-name">
                 <i className="material-icons prefix">assignment_ind</i>

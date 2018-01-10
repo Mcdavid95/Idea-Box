@@ -24,7 +24,7 @@ const LandingPage = () => (
         <button id="register" className="btn landing-buttons">Register</button>
       </Link>
       <Link to="/login">
-      <button id="login" className="btn landing-buttons">Login</button>
+        <button id="login" className="btn landing-buttons">Login</button>
       </Link>
     </div>
   </div>

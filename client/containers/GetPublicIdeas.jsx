@@ -125,14 +125,14 @@ export class GetPublicIdeas extends Component {
                   </div>
                   <div className="card-reveal black-text">
                     <span className="card-title grey-text text-darken-4">
-                    Card Title<i className="material-icons right">close</i>
+                      {ideas.title}<i className="material-icons right">close</i>
                     </span>
                     <div>{typeof ideas.description === 'string' ? compiler(ideas.description) : ''}</div>
                   </div>
                   <div className="card-action">
                     <Link to={`/idea/id/${ideas._id}`}><i className="material-icons">comment</i>Comment</Link>
                     <a
-                      href={`https://twitter.com/intent/tweet?text=This%20is%20amazing%20you%20should%20read%20it&url=${window.location.origin}/idea/${ideas._id}`}
+                      href={`https://twitter.com/intent/tweet?text=This%20is%20amazing%20you%20should%20read%20it&url=${window.location.origin}/view-idea/${ideas._id}`}
                       className="tooltipped center"
                       data-position="bottom"
                       data-delay="50"

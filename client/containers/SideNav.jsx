@@ -84,9 +84,6 @@ export class SideNav extends Component {
                       <NavLink to="/" onClick={this.logout}>Logout</NavLink>
                     </li>
                     <li className="black-text logout-button" id="logout-button">
-                      <NavLink to="/my-ideas">My Ideas</NavLink>
-                    </li>
-                    <li className="black-text logout-button" id="logout-button">
                       <NavLink to="/profile/edit">Update Profile</NavLink>
                     </li>
                   </ul>
@@ -95,7 +92,10 @@ export class SideNav extends Component {
             </ul>
           </li>
           <li><div className="divider" /></li>
-          <li><a className="subheader">Ideas</a></li>
+          <li><a className="subheader"><strong>Ideas</strong></a></li>
+          <li className="black-text logout-button" id="logout-button">
+            <NavLink to="/my-ideas">My Ideas</NavLink>
+          </li>
           <li><Link to="/ideas">All Ideas</Link></li>
           <li>
             <a href="#modal1" className=" modal-trigger">Create New Idea

@@ -105,9 +105,6 @@ header, main, footer {
 
 }
 
-  #logout-button {
-    padding-left: 15vh
-  }
   .previous {
     border: 1px solid white;
     color: $primaryColor;
@@ -143,10 +140,6 @@ header, main, footer {
   position: fixed;
   top: 87%;
 }
-
-// .prefix {
-//   float: left
-// }
 .comment-header {
   display: flex;
   flex-direction: row;
@@ -158,8 +151,6 @@ header, main, footer {
   align-items: center;
 }
 .show-comments {
-  // height: 40vh;
-  // overflow: auto;
   padding-bottom: 81px;
   margin: 0 0 30px 21px;
   display: flex;

@@ -137,7 +137,7 @@ export const forgotPassword = email => dispatch =>
     })
     .catch((err) => {
       dispatch(confirmEmailFailed(err));
-      Materialize.toast(err.response.data.message, 3000, 'rounded red');
+      Materialize.toast(err.response.data.error, 3000, 'rounded red');
     });
 
 const confirmPasswordResetSuccess = password => ({

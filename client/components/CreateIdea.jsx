@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactMde, { ReactMdeCommands } from 'react-mde';
+import shortid from 'shortid';
+import map from 'lodash/map';
 import initialState from '../app/initialState';
+import handleCategory from '../utils/handleCategory';
 /**
  * @class GroupForm
  * @extends React.Component
@@ -46,13 +49,13 @@ export class CreateIdea extends Component {
       status
     };
     this.props.createIdeaRequest(newIdea);
-    this.props.getCurrentIdeas(1);
     this.setState({
       title: '',
       reactMdeValue: { text: '', selection: null },
       category: '',
       status: ''
     });
+    $('#modal1').modal('close');
   }
   /**
    *
@@ -76,6 +79,8 @@ export class CreateIdea extends Component {
    * @return {DOM} DOM Object
    */
   render() {
+    const option = map(handleCategory, (value, key = shortid.generate) =>
+      <option key={value} value={value}>{key}</option>);
     return (
       <div>
         <form onSubmit={this.onSubmit} className="idea-form">
@@ -104,28 +109,16 @@ export class CreateIdea extends Component {
               />
             </div>
           </div>
-          <div className="input-field col s12" >
+          <div className="col s12 m6">
+            <label htmlFor="category">Select a Category</label>
             <select
-              id="categories"
-              name="category"
               className="browser-default"
-              value={this.state.category}
               onChange={this.onChange}
+              value={this.state.category}
+              name="category"
+              id="category"
             >
-              <option value="" disabled defaultValue>Select a Category</option>
-              <option value="Family">Family</option>
-              <option value="Tech">Tech</option>
-              <option value="Agriculture">Agriculture</option>
-              <option value="AI">AI</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Social Media">Social Media</option>
-              <option value="Community">Community</option>
-              <option value="Education">Education</option>
-              <option value="Infastructure">Infastructure</option>
-              <option value="Telecom">Telecom</option>
-              <option value="Computer Science">Computer Science</option>
-              <option value="Transport">Transport</option>
-              <option value="Art and Craft">Entertainment</option>
+              {option}
             </select>
           </div>
           <div className="input-field col s7 m6 select-dropdown">
@@ -156,7 +149,6 @@ export class CreateIdea extends Component {
 
 CreateIdea.propTypes = {
   createIdeaRequest: PropTypes.func.isRequired,
-  getCurrentIdeas: PropTypes.func.isRequired
 
 };
 

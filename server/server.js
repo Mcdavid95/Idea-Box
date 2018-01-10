@@ -36,7 +36,6 @@ let compiler;
 if (process.env.NODE_ENV === 'production') {
   mongoose.connect(configDB.url_production, option); // connect to our production database
   compiler = webpack(prodConfig);
-  console.log(compiler);
 } else if (process.env.NODE_ENV === 'test') {
   mongoose.connect(configDB.url_test); // connect to our test database
   compiler = webpack(devConfig);
@@ -87,10 +86,12 @@ app.get('*', (req, res) => res.status(200).send({
 
 app.listen(port, (err) => {
   if (err) {
-    console.log(err, 'but stuff works');
-  } else {
-    console.log(colors.red(`Server runnin on port ${port}...`));
+    return {
+      error: err,
+      message: 'but stuff works'
+    };
   }
+  console.log(colors.red(`Server runnin on port ${port}...`));
 });
 
 export default app;
