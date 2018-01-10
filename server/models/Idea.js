@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate';
 
 const ideaSchema = mongoose.Schema({
-  title: String,
+  title: { type: String, unique: true },
   description: String,
   updatedAt: Date,
   createdAt: { type: Date, default: Date.now },

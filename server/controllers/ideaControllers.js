@@ -13,23 +13,33 @@ export default {
    * @return {void}
    */
   createIdea(req, res) {
-    const idea = new Idea({
-      title: req.body.title.trim().toLowerCase(),
-      description: req.body.description,
-      author: {
-        id: req.decoded.id,
-        username: req.decoded.username
-      },
-      categories: req.body.category,
-      status: req.body.status
+    const promise = Idea.findOne({
+      title: req.body.title.trim().toLowerCase()
+    }).exec();
+    promise.then((title) => {
+      if (title) {
+        return res.status(409).send({
+          message: 'Idea with that title already exist'
+        });
+      }
+      const idea = new Idea({
+        title: req.body.title.trim().toLowerCase(),
+        description: req.body.description,
+        author: {
+          id: req.decoded.id,
+          username: req.decoded.username
+        },
+        categories: req.body.category,
+        status: req.body.status
+      });
+      idea.save().then(newIdea => res.status(201).send({
+        newIdea,
+        message: 'Idea successfully created'
+      }))
+        .catch(error => res.status(400).send({
+          message: error.message
+        }));
     });
-    idea.save().then(newIdea => res.status(201).send({
-      newIdea,
-      message: 'Idea successfully created'
-    }))
-      .catch(error => res.status(400).send({
-        error: error.message
-      }));
   },
 
   /**

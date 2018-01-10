@@ -55,7 +55,6 @@ export class CreateIdea extends Component {
       category: '',
       status: ''
     });
-    $('#modal1').modal('close');
   }
   /**
    *

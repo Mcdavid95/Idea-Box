@@ -17,6 +17,7 @@ const createIdeaFailed = idea => ({ type: types.CREATE_IDEA_FAILED, idea });
 export const createIdeaRequest = ideaInfo => dispatch => axios.post('/api/v1/idea', ideaInfo)
   .then((response) => {
     dispatch(createIdeaSuccess(response));
+    $('#modal1').modal('close');
     Materialize.toast(response.data.message, 3000, 'rounded green');
   })
   .catch((error) => {
