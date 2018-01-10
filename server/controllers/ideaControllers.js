@@ -53,12 +53,18 @@ export default {
       status: 'public'
     }, { limit: 12, page: req.query.currentPage });
     promise.then((ideas) => {
-      res.status(201).send({
-        ideas: ideas.docs,
-        pages: ideas.pages,
-        total: ideas.total,
-        message: 'Ideas successfully fetched',
-      });
+      if (ideas) {
+        res.status(201).send({
+          ideas: ideas.docs,
+          pages: ideas.pages,
+          total: ideas.total,
+          message: 'Ideas successfully fetched',
+        });
+      } else {
+        res.status(404).send({
+          message: 'No ideas found'
+        });
+      }
     })
       .catch((error) => {
         res.status(400).send({
@@ -79,12 +85,18 @@ export default {
       categories: req.query.category
     }, { limit: 12, page: req.query.currentPage });
     promise.then((ideas) => {
-      res.status(201).send({
-        ideas: ideas.docs,
-        pages: ideas.pages,
-        total: ideas.total,
-        message: 'Ideas successfully fetched',
-      });
+      if (ideas) {
+        res.status(201).send({
+          ideas: ideas.docs,
+          pages: ideas.pages,
+          total: ideas.total,
+          message: 'Ideas successfully fetched',
+        });
+      } else {
+        res.status(404).send({
+          message: 'No ideas found'
+        });
+      }
     })
       .catch((error) => {
         res.status(400).send({
@@ -102,10 +114,16 @@ export default {
   getOneIdea(req, res) {
     const promise = Idea.findById(req.query.id).exec();
     promise.then((idea) => {
-      res.status(201).send({
-        idea,
-        message: 'Idea successfully fetched'
-      });
+      if (idea) {
+        res.status(201).send({
+          idea,
+          message: 'Idea successfully fetched'
+        });
+      } else {
+        res.status(404).send({
+          message: 'Idea not found'
+        });
+      }
     })
       .catch((error) => {
         res.status(400).send({
@@ -225,11 +243,17 @@ export default {
       'author.id': req.decoded.id
     }, { limit: 12, page: req.query.currentPage });
     promise.then((ideas) => {
-      res.status(201).send({
-        ideas: ideas.docs,
-        pages: ideas.pages,
-        total: ideas.total
-      });
+      if (ideas) {
+        res.status(201).send({
+          ideas: ideas.docs,
+          pages: ideas.pages,
+          total: ideas.total
+        });
+      } else {
+        res.status(404).send({
+          message: 'No ideas found'
+        });
+      }
     })
       .catch((error) => {
         res.status(400).send({
