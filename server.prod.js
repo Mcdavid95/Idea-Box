@@ -30,7 +30,7 @@ dotenv.config();
 // database config
 const configDB = require('./server/config/database');
 
-mongoose.createConnection(configDB.url, option);
+mongoose.connect(configDB.url_production, option);
 const compiler = webpack(prodConfig);
 const port = parseInt(process.env.PORT, 10) || 8000;
 
