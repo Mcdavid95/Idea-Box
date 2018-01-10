@@ -6,7 +6,7 @@
   "scripts": {
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov ./node_modules/.bin/mocha --compilers js:babel-core/register ./server/tests/** --timeout 30000 --exit && npm run coverage-report",
-    "start": "NODE_ENV=production babel-node ./server/server.js",
+    "start": "NODE_ENV=production babel-node ./server.prod.js",
     "start:dev": "nodemon --exec babel-node ./server/server.js"
   },
   "repository": {
