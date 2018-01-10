@@ -57,7 +57,7 @@ export class ResetPassword extends Component {
         <div className="landing-page">
           <nav>
             <div className="nav-wrapper">
-              <a href="#" className="brand-logo">Idea-Box</a>
+              <a href="#" className="brand-logo" id="brand-logo">Idea-Box</a>
             </div>
           </nav>
         </div>
