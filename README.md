@@ -67,7 +67,7 @@ Frontend tests is written with ``` jest ``` and ``` enzyme ```.
 * Messages can't be edited or deleted.
 
 ## Documentation
-The API documentation for this project can be found [here](http://docs.postit6.apiary.io/)
+The API documentation for this project can be found [here](ideabox2.docs.apiary.io/)
 
 ## How to Contribute
 The project is open for contribution. You can start by forking this project repo. If you have improvements you want to add, feel free to do so and create a PR against development branch
