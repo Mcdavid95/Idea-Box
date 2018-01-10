@@ -194,7 +194,7 @@ class UserIdeaPage extends Component {
                     <div className="card-action">
                       <Link to={`/idea/edit/${ideas._id}`}><i className="material-icons">edit</i></Link>
                       <a
-                        href={`https://twitter.com/intent/tweet?text=This%20is%20amazing%20you%20should%20read%20it&url=${window.location.origin}/idea/${ideas._id}`}
+                        href={`https://twitter.com/intent/tweet?text=This%20is%20amazing%20you%20should%20read%20it&url=${window.location.origin}/idea/view-idea/${ideas._id}`}
                         className="tooltipped center"
                         data-position="bottom"
                         data-delay="50"

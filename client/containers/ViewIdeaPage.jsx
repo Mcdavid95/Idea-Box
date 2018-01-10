@@ -73,6 +73,9 @@ export class CommentPage extends Component {
             </ul>
           </div>
         </main>
+        <div className="container">
+          <a href="/"><button className="btn landing-buttons">Go to App</button></a>
+        </div>
       </div>
     );
   }

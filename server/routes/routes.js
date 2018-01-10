@@ -38,7 +38,7 @@ router.get('/ideas', jwtVerify.hasToken, ideaController.getAllIdeas);
 router.get('/ideas/category', jwtVerify.hasToken, ideaController.getByCategory);
 
 // get one idea
-router.get('/idea', jwtVerify.hasToken, ideaController.getOneIdea);
+router.get('/idea', ideaController.getOneIdea);
 
 // edit idea
 router.get('/idea/:id', jwtVerify.hasToken, ideaController.editIdea);

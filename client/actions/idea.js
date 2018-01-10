@@ -57,6 +57,7 @@ export const getOneIdea = id => dispatch => axios.get(`/api/v1/idea?id=${id}`)
   })
   .catch((error) => {
     dispatch(getIdeaError(error));
+    history.push('/');
     Materialize.toast('could not fetch idea', 3000, 'rounded red');
   });
 
