@@ -57,3 +57,7 @@ typings/
 # dotenv environment variables file
 .env
 
+# ignore compiled code
+dist/
+bundle.js
+.DS_STORE
